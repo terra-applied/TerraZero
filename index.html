@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TerraZero: Procedural Driving Simulation for Zero-Demonstration Self-Play at Scale</title>
+<meta name="description" content="TerraZero is a fast object-level driving simulator, a procedural scenario generator, and a compute-efficient self-play recipe that trains driving policies from scratch.">
+<meta name="theme-color" content="#006CFA">
+
+<link rel="icon" href="assets/brand/favicon.ico" sizes="32x32">
+<link rel="icon" href="assets/brand/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png">
+
+<script>document.documentElement.className += " js";</script>
+<script>
+/* crypto.randomUUID exists only in secure contexts (HTTPS or localhost). This
+   site is often previewed over plain HTTP on a LAN/Tailscale address, where it
+   is missing; define a standards-compliant fallback so no caller throws. */
+(function () {
+  var c = window.crypto;
+  if (c && typeof c.randomUUID !== "function" && typeof c.getRandomValues === "function") {
+    c.randomUUID = function () {
+      return "10000000-1000-4000-8000-100000000000".replace(/[018]/g, function (ch) {
+        var n = +ch;
+        return (n ^ (c.getRandomValues(new Uint8Array(1))[0] & (15 >> (n / 4)))).toString(16);
+      });
+    };
+  }
+})();
+</script>
+<link rel="stylesheet" href="assets/vendor/katex/katex.min.css">
+<link rel="stylesheet" href="assets/css/styles.css">
+
+<!-- Cloudflare Web Analytics (cookieless, no consent banner needed) -->
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
+        data-cf-beacon='{"token": "8f02b8061c284d6988665baa97f009ea"}'></script>
+<!-- End Cloudflare Web Analytics -->
+</head>
+<body>
+
+<!-- ===================== Header ===================== -->
+<header class="site-header">
+  <div class="header-pill">
+    <a class="brand-mark" href="#top" aria-label="Back to top">
+      <span class="brand-word">TerraZero</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav" id="nav">
+      <a href="#demo">Demo</a>
+      <a href="#system">Simulator</a>
+      <a href="#scenarios">Scenarios</a>
+      <a href="#results">Recipe &amp; Results</a>
+      <a href="#terra-series">Terra Series</a>
+      <a href="https://www.appliedintuition.com/research" target="_blank" rel="noopener">Research ↗</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ===================== Hero ===================== -->
+<section class="hero">
+  <div class="wide">
+    <div class="hero-intro">
+      <p class="eyebrow">Applied Intuition · Technical Report</p>
+      <h1>TerraZero: Procedural Driving Simulation for <span class="accent">Zero-Demonstration Self-Play</span> at Scale</h1>
+      <p class="lead">A fast <strong>object-level traffic simulator</strong>, a <strong>procedural scenario generator</strong>, and a <strong>compute-efficient self-play recipe</strong> that trains driving policies from scratch — with <mark class="hl">zero human demonstrations</mark> — and transfers them <mark class="hl">across cities and datasets</mark>.</p>
+
+      <div class="hero-meta">
+        <p class="byline">
+          <span class="names">Zhouchonghao Wu<sup>1*</sup>, Akshay Rangesh<sup>1*</sup>, Weixin Li<sup>1</sup>, Wei-Jer Chang<sup>1,2</sup>,
+          Zachary Lee<sup>1</sup>, Tim Wang<sup>1</sup>, Wei Zhan<sup>1,2†</sup></span>
+        </p>
+        <p class="affil"><sup>1</sup> Applied Intuition &nbsp;·&nbsp; <sup>2</sup> UC Berkeley &nbsp;·&nbsp; <sup>*</sup> equal contribution &nbsp;·&nbsp; <sup>†</sup> corresponding author</p>
+
+        <div class="actions">
+          <a class="btn btn-primary" href="https://huggingface.co/datasets/woo-who/terrazero-assets/resolve/main/paper/terrazero-technical-report.pdf" target="_blank" rel="noopener">Technical Report</a>
+          <a class="btn" href="https://arxiv.org/abs/2607.13028" target="_blank" rel="noopener">arXiv</a>
+          <button type="button" class="btn" id="bibtex-toggle" aria-expanded="false" aria-controls="bibtex-block">BibTeX</button>
+        </div>
+        <pre class="bibtex" id="bibtex-block" hidden><button type="button" class="copy-btn">Copy</button><code>@techreport{terrazero2026,
+  title       = {TerraZero: Procedural Driving Simulation for Zero-Demonstration Self-Play at Scale},
+  author      = {Wu, Zhouchonghao and Rangesh, Akshay and Li, Weixin and Chang, Wei-Jer and Lee, Zachary and Wang, Tim and Zhan, Wei},
+  institution = {Applied Intuition},
+  year        = {2026},
+  type        = {Technical Report}
+}</code></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== Introduction / Contributions ===================== -->
+<section>
+  <div class="wide reveal">
+    <p class="eyebrow">Contributions</p>
+    <div class="contribs">
+      <div class="contrib">
+        <div class="num">1</div>
+        <div>
+          <h3 style="margin-top:0">A Fast, Feature-Rich Driving Simulator</h3>
+          <p>A configurable C engine built for reinforcement learning at scale — high throughput without giving up realism. It models vehicles, pedestrians, cyclists, and high-fidelity trucks together, with real traffic rules and maps in 3D.</p>
+        </div>
+      </div>
+      <div class="contrib">
+        <div class="num">2</div>
+        <div>
+          <h3 style="margin-top:0">Hard Scenarios, Generated on Demand</h3>
+          <p>A procedural generator that treats logged data as a starting point, not a ceiling. From real maps it composes an effectively unbounded supply of training scenarios — randomized starts and goals, reactive road users, and varied traffic-signal timing.</p>
+        </div>
+      </div>
+      <div class="contrib">
+        <div class="num">3</div>
+        <div>
+          <h3 style="margin-top:0">Driving Policies Trained From Scratch</h3>
+          <p>The <em>Zero</em> in TerraZero names the training stance: <mark class="hl">zero human demonstrations</mark>. A compute-efficient self-play recipe learns by reinforcement signal alone — no imitation, no logged trajectories — and every result we report is trained this way. The resulting policies transfer zero-shot across cities and datasets, picking up region-specific habits such as left-hand traffic on their own.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== Abstract + Demos ===================== -->
+<section id="demo">
+  <div class="wide reveal">
+    <p class="eyebrow">Interactive Demo</p>
+    <h2>Few Maps, Infinite Scenarios</h2>
+    <p style="max-width:72ch">A handful of real maps becomes an effectively unbounded stream of long-tail scenarios. Compose one with the controls and watch TerraZero drive it: choose the agent type (car, truck, or heterogeneous&dagger;), set a traffic condition, drop in road users and hazards, optionally dial in a robustness setting, and pick a viewpoint (agent or top-down) — the simulator procedurally generates the rest, and the selectors narrow to whatever it has on hand.</p>
+    <p class="demo-footnote">&dagger;&nbsp;Heterogeneous agents controlled via a unified policy will be released in work in preparation, to appear on arXiv.</p>
+  </div>
+  <div class="wide reveal">
+    <div class="gallery" id="demo-gallery" data-manifest="assets/videos/manifest.json" hidden>
+      <div class="gallery-rail" role="group" aria-label="Build your own scene"></div>
+      <div class="gallery-stage">
+        <div class="gallery-frame">
+          <video class="gallery-video" autoplay muted loop playsinline controls controlslist="nodownload" preload="metadata"></video>
+        </div>
+        <div class="gallery-meta">
+          <div class="gallery-legend" aria-label="Scene legend"></div>
+          <p class="gallery-caption" aria-live="polite"></p>
+        </div>
+      </div>
+    </div>
+    <noscript>
+      <div class="demo-stage">
+        <div class="demo-panel">
+          <div class="ph-icon">▷</div>
+          <div class="ph-title">Scenario gallery</div>
+          <div class="ph-sub">Enable JavaScript to browse rollouts across regions, traffic controls, road users, and camera views.</div>
+        </div>
+      </div>
+    </noscript>
+  </div>
+</section>
+
+<!-- ===================== System ===================== -->
+<section id="system">
+  <div class="wide reveal">
+    <p class="eyebrow">Simulator</p>
+    <h2>Built for Speed</h2>
+    <p style="max-width:64ch">Large-scale reinforcement learning needs billions of environment steps. TerraZero is engineered for exactly that: a C simulation engine paired with GPU policy inference, delivering the throughput RL requires without trading away realism.</p>
+    <div class="statline" style="margin-top:var(--space-4)">
+      <div><div class="stat-num">560K</div><div class="stat-cap">steps/s &middot; consumer GPU</div></div>
+      <div><div class="stat-num">1.3M</div><div class="stat-cap">steps/s &middot; server GPU</div></div>
+      <div><div class="stat-num">2.8M</div><div class="stat-cap">steps/s &middot; 8&times; server node</div></div>
+    </div>
+    <p class="muted" style="max-width:62ch">Agent steps per second, measured against object-level simulators that report comparable numbers. Hover a bar for the exact value.</p>
+    <figure class="figure">
+      <div class="figure-stage">
+        <div class="chart-wrap" id="throughput-chart" data-src="assets/figures/throughput.json"
+             data-fallback="assets/figures/throughput.svg"></div>
+      </div>
+      <figcaption><span class="fig-label">Figure 1.</span> Throughput across hardware tiers, in agent steps per second. Values marked with a dagger are reported by the original authors.</figcaption>
+    </figure>
+  </div>
+
+  <div class="wide reveal">
+    <h3 style="margin-top:0">High-Fidelity Simulation</h3>
+    <p style="max-width:64ch">Speed never comes at the cost of realism. TerraZero models dynamics for pedestrians, cyclists, vehicles, and high-fidelity trucks; enforces real traffic rules including traffic lights and stop signs; and represents maps in 3D — so policies learn genuine compliance rather than workarounds for scripted flags.</p>
+  </div>
+</section>
+
+<!-- ===================== Scenario Generation ===================== -->
+<section id="scenarios">
+  <div class="wide reveal">
+    <p class="eyebrow">Scenario Generation</p>
+    <h2>The Situations That Matter Most</h2>
+    <p style="max-width:64ch">Real driving logs are overwhelmingly routine. The rare, high-stakes moments — dense merges, sudden cut-ins, near-miss crossings — are exactly what a driving policy most needs to practice, and exactly what logs contain least. TerraZero generates them on demand: from real maps it builds an effectively unlimited stream of challenging scenarios, with reactive traffic, hazards, and signal timing that change every episode.</p>
+  </div>
+
+  <div class="bleed reveal">
+    <figure class="figure">
+      <div class="figure-stage" data-include-svg="assets/figures/npc_generation.svg"></div>
+      <figcaption><span class="fig-label">Figure 2.</span> Procedurally generated road users and hazards: construction and static obstacles, crossing and jaywalking pedestrians, and parked and collided vehicles.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ===================== Recipe & Results ===================== -->
+<section id="results">
+  <div class="wide reveal">
+    <p class="eyebrow">Recipe &amp; Results</p>
+    <div class="results-head">
+      <h2 style="margin:0">State-of-the-Art Driving From Self-Play Alone</h2>
+      <div class="results-badge">
+        <span class="results-badge-num">#1</span>
+        <span class="results-badge-cap">on InterPlan long-tail scenarios</span>
+      </div>
+    </div>
+    <p class="lead" style="max-width:64ch">TerraZero trains driving policies entirely through self-play reinforcement learning — no human demonstrations, no logged trajectories. Because the simulator is so fast, the recipe trades sample efficiency for compute efficiency: it learns the hard cases from scratch, stays stable at scale, and runs a lightweight policy across many GPUs. The result is state-of-the-art closed-loop driving on the interactive long tail, competitive with strong baselines on standard benchmarks, that transfers to new cities and datasets out of the box.</p>
+  </div>
+
+  <!-- InterPlan (interactive comparison explorer) -->
+  <div class="wide reveal">
+    <p class="eyebrow">InterPlan</p>
+    <h3 style="margin-top:.2rem">State-of-the-Art on the Long Tail</h3>
+    <p class="table-lead"><em>On InterPlan's long-tail closed-loop suite — construction zones, accident sites, jaywalkers, nudging, overtaking, and dense lane changes — TerraZero leads every rule-based, imitation, and RL baseline, and tops even the LLM-based planners, using no rule-based planner and no language model at inference. Bars compare the overall closed-loop score against the top competitors.</em></p>
+    <div class="cmp" data-src="assets/figures/interplan.json">
+      <noscript>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Method</th><th>Type</th><th>Score</th></tr></thead>
+            <tbody>
+              <tr class="is-best"><td>TerraZero</td><td>RL</td><td>67.87</td></tr>
+              <tr><td>HybridLLMPlanner (Llama-7B)</td><td>Hybrid</td><td>53</td></tr>
+              <tr><td>HybridLLMPlanner (Llama-13B)</td><td>Hybrid</td><td>48</td></tr>
+              <tr><td>PDM+PPO</td><td>Hybrid</td><td>43.2</td></tr>
+              <tr><td>PPO</td><td>RL</td><td>42.1</td></tr>
+              <tr><td>PDM-Closed</td><td>Rule</td><td>42</td></tr>
+              <tr><td>HybridLLMPlanner (GPT-3.5)</td><td>Hybrid</td><td>40</td></tr>
+              <tr><td>IDM</td><td>Rule</td><td>31</td></tr>
+              <tr><td>IDM+MOBIL</td><td>Rule</td><td>31</td></tr>
+              <tr><td>Diffusion Planner</td><td>IL</td><td>25.8</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </noscript>
+    </div>
+    <figcaption><span class="fig-label">Figure 3.</span> InterPlan long-tail closed-loop reactive score (higher is better) on the official 80-scenario split, comparing the top contenders. TerraZero uses no rule-based planner or language model at inference. On the harder full 335-scenario set the same checkpoint scores 67.6.</figcaption>
+
+    <div class="ipg" data-manifest="assets/videos/interplan.json" hidden>
+      <button type="button" class="ipg-toggle" aria-expanded="false" aria-controls="ipg-panel-interplan">
+        <span class="ipg-chevron" aria-hidden="true"></span>
+        <span>Watch TerraZero drive InterPlan scenarios</span>
+        <span class="ipg-count"></span>
+      </button>
+      <div class="ipg-panel" id="ipg-panel-interplan" hidden>
+        <p class="ipg-note" hidden></p>
+        <div class="ipg-strip" role="group" aria-label="InterPlan scenario demos"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- nuPlan val14 (interactive comparison explorer) -->
+  <div class="wide reveal">
+    <p class="eyebrow">nuPlan val14</p>
+    <h3 style="margin-top:.2rem">Closed-Loop Driving Policy</h3>
+    <p class="table-lead"><em>Trained exclusively through self-play RL with zero human demonstrations, TerraZero is among the best fully learned planners on nuPlan val14 by composite score, and leads the field for safety — no-at-fault collision and time-to-collision.</em></p>
+    <div class="cmp" data-src="assets/figures/val14.json">
+      <noscript>
+        <div class="table-wrap">
+          <table class="data">
+            <thead>
+              <tr>
+                <th>Planner</th><th>Type</th><th>Score</th><th>Ego Prog.</th><th>No AF-Coll.</th>
+                <th>Comfort</th><th>TTC</th><th>Drv. Dir.</th><th>Speed Lim.</th><th>Drv. Area</th><th>Making Prog.</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>TerraZero</td><td>RL</td><td>92.27</td><td>88.91</td><td>99.11</td><td>97.41</td><td>96.06</td><td>99.24</td><td>99.45</td><td>99.28</td><td>97.85</td></tr>
+              <tr><td>Gigaflow</td><td>RL</td><td>93.8</td><td>93.6</td><td>98.4</td><td>96.4</td><td>93.8</td><td>99.6</td><td>99.9</td><td>99.7</td><td>99.0</td></tr>
+              <tr><td>FlowDrive w/ guidance + PDM scoring</td><td>Hybrid</td><td>92.96</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+              <tr><td>SPDM</td><td>Rule</td><td>92.28</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+              <tr><td>PDM-Closed</td><td>Rule</td><td>92.13</td><td>90.26</td><td>97.90</td><td>94.72</td><td>93.83</td><td>99.96</td><td>99.83</td><td>99.46</td><td>99.11</td></tr>
+              <tr><td>CaRL</td><td>RL</td><td>90.60</td><td>91.30</td><td>97.05</td><td>88.55</td><td>92.31</td><td>99.15</td><td>99.36</td><td>99.91</td><td>99.11</td></tr>
+              <tr><td>PLUTO</td><td>Hybrid</td><td>89.66</td><td>86.11</td><td>97.09</td><td>91.86</td><td>94.10</td><td>99.87</td><td>98.86</td><td>99.28</td><td>98.57</td></tr>
+              <tr><td>FlowDrive</td><td>IL</td><td>85.37</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+              <tr><td>Flow Planner</td><td>IL</td><td>83.31</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+              <tr><td>Diffusion Planner*</td><td>IL</td><td>82.73</td><td>85.88</td><td>93.07</td><td>89.45</td><td>88.19</td><td>99.82</td><td>98.29</td><td>97.85</td><td>96.42</td></tr>
+              <tr><td>Log Replay (iLQR)</td><td>Replay</td><td>82.05</td><td>99.32</td><td>85.69</td><td>98.93</td><td>80.77</td><td>99.28</td><td>96.46</td><td>99.55</td><td>100.00</td></tr>
+              <tr><td>IDM</td><td>Rule</td><td>77.33</td><td>85.20</td><td>89.22</td><td>93.11</td><td>81.57</td><td>99.24</td><td>97.20</td><td>93.02</td><td>96.33</td></tr>
+              <tr><td>PlanTF</td><td>IL</td><td>76.14</td><td>77.21</td><td>95.21</td><td>93.56</td><td>90.61</td><td>99.33</td><td>98.50</td><td>96.33</td><td>89.53</td></tr>
+              <tr><td>Urban Driver</td><td>IL</td><td>53.05</td><td>87.17</td><td>72.45</td><td>99.28</td><td>66.37</td><td>96.87</td><td>81.66</td><td>83.36</td><td>94.28</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </noscript>
+    </div>
+    <figcaption><span class="fig-label">Figure 4.</span> Driving-policy evaluation on nuPlan val14 (closed-loop reactive), higher is better, comparing the top fully learned planners; rule-based and hybrid planners are omitted here. Radar axes run 0–100; an asterisk marks author-retrained variants. Among fully learned approaches TerraZero is among the best by composite score and leads the field for safety — no-at-fault collision and time-to-collision.</figcaption>
+
+    <div class="ipg" data-manifest="assets/videos/val14.json" hidden>
+      <button type="button" class="ipg-toggle" aria-expanded="false" aria-controls="ipg-panel-val14">
+        <span class="ipg-chevron" aria-hidden="true"></span>
+        <span>Watch TerraZero drive val14 scenarios</span>
+        <span class="ipg-count"></span>
+      </button>
+      <div class="ipg-panel" id="ipg-panel-val14" hidden>
+        <p class="ipg-note" hidden></p>
+        <div class="ipg-strip" role="group" aria-label="nuPlan val14 demos"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WOSAC (interactive comparison explorer) -->
+  <div class="wide reveal">
+    <p class="eyebrow">WOSAC</p>
+    <h3 style="margin-top:.2rem">Sim-Agent Evaluation</h3>
+    <p class="table-lead"><em>As a sim agent, TerraZero is the strongest method that uses no demonstrations at all — no imitation and no reference policy — matching SPACeR and beating HR-PPO, which both derive from a reference policy trained on logged data. The demonstration-based CAT-K and the logged expert (dashed) are shown for reference.</em></p>
+    <div class="cmp-pair">
+      <div class="cmp-panel">
+        <p class="cmp-panel-title">WOSAC 2023</p>
+        <div class="cmp" data-src="assets/figures/wosac-2023.json">
+          <noscript>
+            <div class="table-wrap">
+              <table class="data">
+                <thead><tr><th>Method</th><th>Type</th><th>Realism Meta</th></tr></thead>
+                <tbody>
+                  <tr><td>Expert Demonstration</td><td>Reference</td><td>0.722</td></tr>
+                  <tr><td>TerraZero</td><td>RL</td><td>0.632</td></tr>
+                  <tr><td>Gigaflow</td><td>RL</td><td>0.619</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </noscript>
+        </div>
+      </div>
+      <div class="cmp-panel">
+        <p class="cmp-panel-title">WOSAC 2024</p>
+        <div class="cmp" data-src="assets/figures/wosac-2024.json">
+          <noscript>
+            <div class="table-wrap">
+              <table class="data">
+                <thead><tr><th>Method</th><th>Type</th><th>Realism</th></tr></thead>
+                <tbody>
+                  <tr><td>Expert Demonstration</td><td>Demonstration-based</td><td>0.80</td></tr>
+                  <tr><td>CAT-K</td><td>Demonstration-based</td><td>0.766</td></tr>
+                  <tr><td>SPACeR</td><td>RL (demonstration-derived)</td><td>0.741</td></tr>
+                  <tr><td>TerraZero</td><td>RL</td><td>0.740</td></tr>
+                  <tr><td>HR-PPO</td><td>RL (demonstration-derived)</td><td>0.716</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </noscript>
+        </div>
+      </div>
+    </div>
+    <div class="chart-legend cmp-legend cmp-pair-legend" data-legend-group="wosac">
+      <span class="key on" data-type="__hero__"><svg class="swatch" viewBox="0 0 14 14"><rect x="1" y="1" width="12" height="12" rx="3" fill="#006CFA"/></svg><span class="key-label" style="color:#006CFA;font-weight:700">TerraZero</span></span>
+      <span class="key on" data-type="RL"><svg class="swatch" viewBox="0 0 14 14"><rect x="1" y="1" width="12" height="12" rx="3" fill="#b2b9c2"/></svg><span class="key-label" style="font-weight:700;color:#1f2937">RL</span></span>
+      <span class="key on" data-type="RLdemo"><svg class="swatch" viewBox="0 0 14 14"><rect x="1" y="1" width="12" height="12" rx="3" fill="url(#cmp-pat-RLdemo)"/></svg><span class="key-label" style="font-weight:700;color:#1f2937">RL (Demonstration-derived)</span></span>
+      <span class="key on" data-type="__ref__"><svg class="swatch" viewBox="0 0 14 14"><rect x="1.5" y="1.5" width="11" height="11" rx="3" fill="none" stroke="#767676" stroke-width="1.5" stroke-dasharray="3 2"/></svg><span class="key-label" style="font-style:italic;color:#767676">Demonstration-based</span></span>
+    </div>
+    <figcaption><span class="fig-label">Figure 5.</span> Sim-agent realism on the Waymo Open Sim Agents Challenge, evaluated zero-shot (higher is better). Solid RL bars use no demonstrations at all; shaded RL bars derive from a reference policy trained on logged data (SPACeR, HR-PPO); dashed bars are demonstration-based references (the logged Expert Demonstration and, on 2024, CAT-K). <b>Left:</b> the 2023 edition on the full Waymo validation split, against Gigaflow. <b>Right:</b> the 2024 edition on vehicles (shared 880-scenario subset). TerraZero uses no demonstrations and no reference policy, matching the realism of the demonstration-derived methods.</figcaption>
+
+    <div class="ipg" data-manifest="assets/videos/wosac.json" hidden>
+      <button type="button" class="ipg-toggle" aria-expanded="false" aria-controls="ipg-panel-wosac">
+        <span class="ipg-chevron" aria-hidden="true"></span>
+        <span>Watch TerraZero simulate WOSAC scenarios</span>
+        <span class="ipg-count"></span>
+      </button>
+      <div class="ipg-panel" id="ipg-panel-wosac" hidden>
+        <p class="ipg-note" hidden></p>
+        <div class="ipg-strip" role="group" aria-label="WOSAC sim-agent demos"></div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ===================== Terra Series ===================== -->
+<section id="terra-series">
+  <div class="wide reveal">
+    <p class="eyebrow">Terra Series</p>
+    <h2>Empowering Physical AI Research</h2>
+    <div class="intg" id="integrations-widget">
+      <div class="intg-tabs" role="tablist" aria-label="Select a Terra Series project">
+        <span class="intg-slider" aria-hidden="true"></span>
+        <button type="button" class="intg-tab is-active" role="tab" id="intg-tab-a"
+                aria-selected="true" aria-controls="intg-panel-a">TerraTransfer</button>
+        <button type="button" class="intg-tab" role="tab" id="intg-tab-d"
+                aria-selected="false" aria-controls="intg-panel-d" tabindex="-1">SPACeR</button>
+      </div>
+
+      <div class="intg-stage">
+        <!-- TerraTransfer -->
+        <div class="intg-panel intg-panel--wide" role="tabpanel" id="intg-panel-a" aria-labelledby="intg-tab-a">
+          <div class="intg-text">
+            <h3>Learning to Drive Without Expert Demonstrations</h3>
+            <p>TerraTransfer uses TerraZero's self-play planner as a teacher and distills its competence into an end-to-end camera policy — no human demonstrations required. It aligns the vision policy's latent space to the planner's vector representation, achieving 0.490 HD-Score on HUGSim and outperforming imitation baselines by +0.130.</p>
+            <div class="series-links">
+              <a class="btn btn-primary" href="https://terra-applied.github.io/TerraTransfer" target="_blank" rel="noopener">Project Page →</a>
+              <a class="btn" href="https://arxiv.org/abs/2606.17386" target="_blank" rel="noopener">arXiv</a>
+            </div>
+          </div>
+          <div class="intg-showcase">
+            <div class="intg-media">
+              <video class="intg-video" muted loop playsinline preload="metadata"
+                     controls controlslist="nodownload"
+                     src="https://huggingface.co/datasets/woo-who/terrazero-assets/resolve/main/terra-series/terratransfer.mp4"></video>
+            </div>
+          </div>
+        </div>
+
+        <!-- SPACeR -->
+        <div class="intg-panel intg-panel--wide" role="tabpanel" id="intg-panel-d" aria-labelledby="intg-tab-d" hidden>
+          <div class="intg-text">
+            <h3>Human-Like Simulation Agents via Self-Play Anchoring <span class="series-badge">ICLR 2026</span></h3>
+            <p>SPACeR anchors TerraZero's self-play RL to a pretrained tokenized reference model, making sim agents that are simultaneously human-like and reactive. The resulting policy is ~50× smaller than tokenized baselines with 10× faster inference, and outperforms prior self-play and imitation methods on the Waymo Sim Agents Challenge.</p>
+            <div class="series-links">
+              <a class="btn btn-primary" href="https://spacer-ai.github.io/" target="_blank" rel="noopener">Project Page →</a>
+              <a class="btn" href="https://arxiv.org/abs/2510.18060" target="_blank" rel="noopener">arXiv</a>
+              <a class="btn" href="https://openreview.net/forum?id=Q5H3NCy18S" target="_blank" rel="noopener">Paper</a>
+            </div>
+          </div>
+          <div class="intg-showcase">
+            <div class="threeup">
+              <div class="threeup-cell">
+                <div class="threeup-vid">
+                  <video loop muted playsinline preload="metadata"
+                         src="https://spacer-ai.github.io/static/videos/source/baseline_0/paper_selfplay_nodrop_2a02131f75e5a3c3_sample0.mp4"></video>
+                </div>
+                <p class="threeup-cap">PPO</p>
+              </div>
+              <div class="threeup-cell">
+                <div class="threeup-vid">
+                  <video loop muted playsinline preload="metadata"
+                         src="https://spacer-ai.github.io/static/videos/source/baseline_0/paper_humanppo_2a02131f75e5a3c3_sample0.mp4"></video>
+                </div>
+                <p class="threeup-cap">HR-PPO</p>
+              </div>
+              <div class="threeup-cell">
+                <div class="threeup-vid">
+                  <div class="threeup-legend" aria-hidden="true">
+                    <span class="row"><span class="sw" style="background:#87CEEB"></span>Targeted Agent</span>
+                    <span class="row"><span class="sw" style="background:#7a7a7a"></span>Other Agents</span>
+                  </div>
+                  <video loop muted playsinline preload="metadata"
+                         src="https://spacer-ai.github.io/static/videos/source/baseline_0/paper_human_2a02131f75e5a3c3_sample0.mp4"></video>
+                </div>
+                <p class="threeup-cap">SPACeR</p>
+              </div>
+            </div>
+            <figure class="figure" style="margin:0">
+              <img src="assets/figures/spacer_arch.png" alt="SPACeR architecture: batched self-play rollouts anchored to a tokenized reference model via a KL term." loading="lazy">
+              <figcaption>SPACeR anchors decentralized self-play to a frozen tokenized reference model, balancing a task reward with a human-likeness KL term.</figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+      <noscript>
+        <p class="muted">Enable JavaScript to browse the Terra Series.</p>
+      </noscript>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ===================== Footer ===================== -->
+<footer class="site-footer">
+  <div class="wide">
+    <div class="foot-grid">
+      <div>
+        <div class="brand-mark" style="color:#fff">TerraZero</div>
+        <p style="max-width:38ch;color:#cfd3da">Procedural driving simulation for zero-demonstration self-play at scale.</p>
+      </div>
+      <div>
+        <p style="margin:0 0 .4rem;font-weight:600">Links</p>
+        <p style="margin:.2rem 0"><a href="https://huggingface.co/datasets/woo-who/terrazero-assets/resolve/main/paper/terrazero-technical-report.pdf" target="_blank" rel="noopener">Report</a></p>
+        <p style="margin:.2rem 0"><span class="foot-pending">arXiv (on release)</span></p>
+        <p style="margin:.2rem 0"><span class="foot-pending">Blog Post (on release)</span></p>
+      </div>
+    </div>
+    <p class="copyright">© 2026 Applied Intuition. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="assets/vendor/katex/katex.min.js" defer></script>
+<script src="assets/vendor/katex/auto-render.min.js" defer></script>
+<script src="assets/js/charts.js" defer></script>
+<script src="assets/js/comparison.js" defer></script>
+<script src="assets/js/tables.js" defer></script>
+<script src="assets/js/main.js" defer></script>
+</body>
+</html>

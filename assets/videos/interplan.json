@@ -1,0 +1,38 @@
+{
+  "base": "https://huggingface.co/datasets/woo-who/terrazero-assets/resolve/40d1d002d203bde0d33902143461fa6a3c56e0d6/interplan/",
+  "aspect": "1 / 1",
+  "clips": [
+    {
+      "src": "traffic-high.mp4",
+      "label": "High-density traffic"
+    },
+    {
+      "src": "traffic-medium.mp4",
+      "label": "Medium-density traffic"
+    },
+    {
+      "src": "traffic-low.mp4",
+      "label": "Low-density traffic"
+    },
+    {
+      "src": "nudge.mp4",
+      "label": "Nudge around parked vehicle"
+    },
+    {
+      "src": "overtake.mp4",
+      "label": "Overtake parked vehicle"
+    },
+    {
+      "src": "jaywalking.mp4",
+      "label": "Jaywalking pedestrian"
+    },
+    {
+      "src": "crashed-cars.mp4",
+      "label": "Avoid crashed cars"
+    },
+    {
+      "src": "construction.mp4",
+      "label": "Construction zone"
+    }
+  ]
+}

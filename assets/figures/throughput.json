@@ -1,0 +1,87 @@
+{
+  "title": "Agent steps per second",
+  "tiers": [
+    {
+      "key": "consumer",
+      "label": "Consumer GPU",
+      "note": "single consumer-grade GPU"
+    },
+    {
+      "key": "server",
+      "label": "Server GPU",
+      "note": "single server-grade GPU"
+    },
+    {
+      "key": "server8x",
+      "label": "8\u00d7 Server node",
+      "note": "8\u00d7 server-grade GPU node"
+    }
+  ],
+  "systems": [
+    {
+      "name": "Nocturne",
+      "backend": "C++",
+      "values": {
+        "consumer": 2000,
+        "server": null,
+        "server8x": null
+      },
+      "dagger": {
+        "consumer": true
+      }
+    },
+    {
+      "name": "GPUDrive",
+      "backend": "CUDA",
+      "values": {
+        "consumer": 11000,
+        "server": 22000,
+        "server8x": null
+      }
+    },
+    {
+      "name": "Waymax",
+      "backend": "JAX",
+      "values": {
+        "consumer": null,
+        "server": 319000,
+        "server8x": null
+      },
+      "dagger": {
+        "server": true
+      }
+    },
+    {
+      "name": "PufferDrive",
+      "backend": "C",
+      "values": {
+        "consumer": 320000,
+        "server": 745000,
+        "server8x": null
+      }
+    },
+    {
+      "name": "Gigaflow",
+      "backend": "\u2014",
+      "values": {
+        "consumer": null,
+        "server": null,
+        "server8x": 530000
+      },
+      "dagger": {
+        "server8x": true
+      }
+    },
+    {
+      "name": "TerraZero",
+      "backend": "C",
+      "highlight": true,
+      "values": {
+        "consumer": 560000,
+        "server": 1300000,
+        "server8x": 2800000
+      }
+    }
+  ],
+  "highlight": "TerraZero"
+}

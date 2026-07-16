@@ -1,0 +1,219 @@
+{
+  "title": "nuPlan val14 — closed-loop reactive",
+  "composite": {
+    "key": "score",
+    "label": "Score",
+    "max": 100,
+    "higherBetter": true
+  },
+  "axes": [
+    {
+      "key": "egoProg",
+      "label": "Ego Prog."
+    },
+    {
+      "key": "noAfColl",
+      "label": "No AF-Coll."
+    },
+    {
+      "key": "comfort",
+      "label": "Comfort"
+    },
+    {
+      "key": "ttc",
+      "label": "TTC"
+    },
+    {
+      "key": "drvDir",
+      "label": "Drv. Dir."
+    },
+    {
+      "key": "speedLim",
+      "label": "Speed Lim."
+    },
+    {
+      "key": "drvArea",
+      "label": "Drv. Area"
+    },
+    {
+      "key": "makingProg",
+      "label": "Making Prog."
+    }
+  ],
+  "methods": [
+    {
+      "name": "IDM",
+      "type": "Rule",
+      "composite": 77.33,
+      "components": {
+        "egoProg": 85.2,
+        "noAfColl": 89.22,
+        "comfort": 93.11,
+        "ttc": 81.57,
+        "drvDir": 99.24,
+        "speedLim": 97.2,
+        "drvArea": 93.02,
+        "makingProg": 96.33
+      }
+    },
+    {
+      "name": "PDM-Closed",
+      "type": "Rule",
+      "default": true,
+      "composite": 92.13,
+      "components": {
+        "egoProg": 90.26,
+        "noAfColl": 97.9,
+        "comfort": 94.72,
+        "ttc": 93.83,
+        "drvDir": 99.96,
+        "speedLim": 99.83,
+        "drvArea": 99.46,
+        "makingProg": 99.11
+      }
+    },
+    {
+      "name": "SPDM",
+      "type": "Rule",
+      "composite": 92.28
+    },
+    {
+      "name": "PLUTO",
+      "type": "Hybrid",
+      "composite": 89.66,
+      "components": {
+        "egoProg": 86.11,
+        "noAfColl": 97.09,
+        "comfort": 91.86,
+        "ttc": 94.1,
+        "drvDir": 99.87,
+        "speedLim": 98.86,
+        "drvArea": 99.28,
+        "makingProg": 98.57
+      }
+    },
+    {
+      "name": "FlowDrive (guid.+PDM)",
+      "type": "Hybrid",
+      "composite": 92.96
+    },
+    {
+      "name": "Urban Driver",
+      "type": "IL",
+      "composite": 53.05,
+      "components": {
+        "egoProg": 87.17,
+        "noAfColl": 72.45,
+        "comfort": 99.28,
+        "ttc": 66.37,
+        "drvDir": 96.87,
+        "speedLim": 81.66,
+        "drvArea": 83.36,
+        "makingProg": 94.28
+      }
+    },
+    {
+      "name": "PlanTF",
+      "type": "IL",
+      "composite": 76.14,
+      "components": {
+        "egoProg": 77.21,
+        "noAfColl": 95.21,
+        "comfort": 93.56,
+        "ttc": 90.61,
+        "drvDir": 99.33,
+        "speedLim": 98.5,
+        "drvArea": 96.33,
+        "makingProg": 89.53
+      }
+    },
+    {
+      "name": "Diffusion Planner*",
+      "type": "IL",
+      "show": true,
+      "composite": 82.73,
+      "components": {
+        "egoProg": 85.88,
+        "noAfColl": 93.07,
+        "comfort": 89.45,
+        "ttc": 88.19,
+        "drvDir": 99.82,
+        "speedLim": 98.29,
+        "drvArea": 97.85,
+        "makingProg": 96.42
+      }
+    },
+    {
+      "name": "Flow Planner",
+      "type": "IL",
+      "show": true,
+      "composite": 83.31
+    },
+    {
+      "name": "Gigaflow",
+      "type": "RL",
+      "default": true,
+      "show": true,
+      "composite": 93.8,
+      "components": {
+        "egoProg": 93.6,
+        "noAfColl": 98.4,
+        "comfort": 96.4,
+        "ttc": 93.8,
+        "drvDir": 99.6,
+        "speedLim": 99.9,
+        "drvArea": 99.7,
+        "makingProg": 99.0
+      }
+    },
+    {
+      "name": "CaRL",
+      "type": "RL",
+      "default": true,
+      "show": true,
+      "composite": 90.6,
+      "components": {
+        "egoProg": 91.3,
+        "noAfColl": 97.05,
+        "comfort": 88.55,
+        "ttc": 92.31,
+        "drvDir": 99.15,
+        "speedLim": 99.36,
+        "drvArea": 99.91,
+        "makingProg": 99.11
+      }
+    },
+    {
+      "name": "TerraZero",
+      "type": "RL",
+      "highlight": true,
+      "default": true,
+      "composite": 92.27,
+      "components": {
+        "egoProg": 88.91,
+        "noAfColl": 99.11,
+        "comfort": 97.41,
+        "ttc": 96.06,
+        "drvDir": 99.24,
+        "speedLim": 99.45,
+        "drvArea": 99.28,
+        "makingProg": 97.85
+      }
+    },
+    {
+      "name": "Log Replay (iLQR)",
+      "type": "Replay",
+      "composite": 82.05,
+      "components": {
+        "egoProg": 99.32,
+        "noAfColl": 85.69,
+        "comfort": 98.93,
+        "ttc": 80.77,
+        "drvDir": 99.28,
+        "speedLim": 96.46,
+        "drvArea": 99.55,
+        "makingProg": 100.0
+      }
+    }
+  ]
+}

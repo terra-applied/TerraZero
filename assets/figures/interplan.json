@@ -1,0 +1,30 @@
+{
+  "title": "InterPlan — long-tail closed-loop",
+  "composite": {
+    "key": "score",
+    "label": "InterPlan Score",
+    "max": 100,
+    "higherBetter": true
+  },
+  "axes": [],
+  "methods": [
+    { "name": "IDM", "type": "Rule", "composite": 31 },
+    { "name": "IDM+MOBIL", "type": "Rule", "composite": 31 },
+    { "name": "PDM-Closed", "type": "Rule", "default": true, "composite": 42 },
+    { "name": "SPDM", "type": "Rule", "show": true, "composite": 63.66 },
+    { "name": "Diffusion Planner", "type": "IL", "composite": 25.8 },
+    { "name": "HybridLLMPlanner (GPT-3.5)", "type": "Hybrid", "composite": 40 },
+    { "name": "HybridLLMPlanner (Llama-13B)", "type": "Hybrid", "composite": 48 },
+    { "name": "HybridLLMPlanner (Llama-7B)", "type": "Hybrid", "default": true, "show": true, "composite": 53 },
+    { "name": "PPO", "type": "RL", "composite": 42.1 },
+    { "name": "PDM+PPO", "type": "Hybrid", "default": true, "show": true, "composite": 43.2 },
+    { "name": "FlowDrive (guid.+PDM)", "type": "Hybrid", "show": true, "composite": 44.05 },
+    {
+      "name": "TerraZero",
+      "type": "RL",
+      "highlight": true,
+      "default": true,
+      "composite": 67.87
+    }
+  ]
+}
