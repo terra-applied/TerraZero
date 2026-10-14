@@ -1,0 +1,798 @@
+{
+  "base": "https://huggingface.co/datasets/woo-who/terrazero-assets/resolve/1bfcf49beccc7cdd57c505e4e8134f4606ad01fa/videos/",
+  "placeholder": "blank.mp4",
+  "policies": [
+    [
+      "car",
+      "Car"
+    ],
+    [
+      "truck",
+      "Truck"
+    ],
+    [
+      "hetero",
+      "Heterogeneous"
+    ]
+  ],
+  "robustness": [
+    [
+      "none",
+      "None"
+    ],
+    [
+      "noisy",
+      "Noisy sensor"
+    ]
+  ],
+  "controls": [
+    [
+      "jam",
+      "Dense traffic"
+    ],
+    [
+      "tl",
+      "Traffic light"
+    ],
+    [
+      "stop",
+      "Stop sign"
+    ],
+    [
+      "urban",
+      "Urban streets"
+    ],
+    [
+      "uncontrolled",
+      "Uncontrolled intersection"
+    ]
+  ],
+  "npcs": [
+    [
+      "construction",
+      "Construction"
+    ],
+    [
+      "carcrash",
+      "Car crash"
+    ],
+    [
+      "crosswalk",
+      "Crosswalk"
+    ],
+    [
+      "jaywalk",
+      "Jaywalking"
+    ],
+    [
+      "off",
+      "None"
+    ]
+  ],
+  "views": [
+    [
+      "agent",
+      "Agent"
+    ],
+    [
+      "aerial",
+      "Top-down"
+    ],
+    [
+      "fullmap",
+      "Full map"
+    ]
+  ],
+  "regions": {
+    "boston": "Boston",
+    "pittsburgh": "Pittsburgh",
+    "singapore": "Singapore",
+    "vegas": "Las Vegas",
+    "carla": "CARLA"
+  },
+  "drive": {
+    "singapore": "LHD",
+    "_default": "RHD"
+  },
+  "heteroNote": "Heterogeneous agents controlled via a unified policy will be released in work in preparation, to appear on arXiv.",
+  "clips": [
+    {
+      "policy": "car",
+      "robustness": "none",
+      "control": "urban",
+      "npc": "carcrash",
+      "region": "vegas",
+      "agent": "render_v10/car__jam__carcrash__ix6638/00_us-nv-las-vegas-strip__B_00281__agent.mp4",
+      "aerial": "render_v10/car__jam__carcrash__ix6638/00_us-nv-las-vegas-strip__B_00281__aerial.mp4"
+    },
+    {
+      "policy": "car",
+      "robustness": "none",
+      "control": "jam",
+      "npc": "construction",
+      "region": "boston",
+      "agent": "render_v10/car__jam__carcrash__ix6638/12_us-ma-boston__B_00277__agent.mp4",
+      "aerial": "render_v10/car__jam__carcrash__ix6638/12_us-ma-boston__B_00277__aerial.mp4"
+    },
+    {
+      "policy": "car",
+      "robustness": "none",
+      "control": "jam",
+      "npc": "carcrash",
+      "region": "pittsburgh",
+      "agent": "render_v10/car__jam__carcrash__ix6638/13_us-pa-pittsburgh-hazelwood__B_00063__agent.mp4",
+      "aerial": "render_v10/car__jam__carcrash__ix6638/13_us-pa-pittsburgh-hazelwood__B_00063__aerial.mp4"
+    },
+    {
+      "policy": "car",
+      "robustness": "none",
+      "control": "jam",
+      "npc": "construction",
+      "region": "boston",
+      "agent": "render_v10/car__jam__construction__ix6638/00_us-ma-boston__B_00345__agent.mp4",
+      "aerial": "render_v10/car__jam__construction__ix6638/00_us-ma-boston__B_00345__aerial.mp4"
+    },
+    {
+      "policy": "car",
+      "robustness": "none",
+      "control": "jam",
+      "npc": "construction",
+      "region": "singapore",
+      "agent": "render_v10/car__jam__construction__ix6638/13_sg-one-north__B_00470__agent.mp4",
+      "aerial": "render_v10/car__jam__construction__ix6638/13_sg-one-north__B_00470__aerial.mp4"
+    },
+    {
+      "policy": "car",
+      "robustness": "none",
+      "control": "jam",
+      "npc": "construction",
+      "region": "vegas",
+      "agent": "render_v10/car__jam__construction__ix6638/19_us-nv-las-vegas-strip__B_00455__agent.mp4",
+      "aerial": "render_v10/car__jam__construction__ix6638/19_us-nv-las-vegas-strip__B_00455__aerial.mp4"
+    },
+    {
+      "policy": "car",
+      "robustness": "none",
+      "control": "jam",
+      "npc": "crosswalk",
+      "region": "singapore",
+      "agent": "render_v10/car__jam__crosswalk__ix6638/08_sg-one-north__B_00778__agent.mp4",
+      "aerial": "render_v10/car__jam__crosswalk__ix6638/08_sg-one-north__B_00778__aerial.mp4"
+    },
+    {
+      "policy": "car",
+      "robustness": "none",
+      "control": "jam",
+      "npc": "crosswalk",
+      "region": "singapore",
+      "agent": "render_v10/car__jam__crosswalk__ix6638/11_sg-one-north__B_00373__agent.mp4",
+      "aerial": "render_v10/car__jam__crosswalk__ix6638/11_sg-one-north__B_00373__aerial.mp4"
+    },
+    {
+      "policy": "car",
+      "robustness": "none",
+      "control": "jam",
+      "npc": "crosswalk",
+      "region": "boston",
+      "agent": "render_v10/car__jam__crosswalk__ix6638/14_us-ma-boston__B_00301__agent.mp4",
+      "aerial": "render_v10/car__jam__crosswalk__ix6638/14_us-ma-boston__B_00301__aerial.mp4"
+    },
+    {
+      "policy": "car",
+      "robustness": "none",
+      "control": "jam",
+      "npc": "crosswalk",
+      "region": "pittsburgh",
+      "agent": "render_v10/car__jam__crosswalk__ix6638/19_us-pa-pittsburgh-hazelwood__B_00151__agent.mp4",
+      "aerial": "render_v10/car__jam__crosswalk__ix6638/19_us-pa-pittsburgh-hazelwood__B_00151__aerial.mp4"
+    },
+    {
+      "policy": "car",
+      "robustness": "none",
+      "control": "jam",
+      "npc": "jaywalk",
+      "region": "boston",
+      "agent": "render_v10/car__jam__jaywalk__ix6638/01_us-ma-boston__B_00519__agent.mp4",
+      "aerial": "render_v10/car__jam__jaywalk__ix6638/01_us-ma-boston__B_00519__aerial.mp4"
+    },
+    {
+      "policy": "car",
+      "robustness": "none",
+      "control": "jam",
+      "npc": "jaywalk",
+      "region": "pittsburgh",
+      "agent": "render_v10/car__jam__jaywalk__ix6638/18_us-pa-pittsburgh-hazelwood__B_00601__agent.mp4",
+      "aerial": "render_v10/car__jam__jaywalk__ix6638/18_us-pa-pittsburgh-hazelwood__B_00601__aerial.mp4"
+    },
+    {
+      "policy": "car",
+      "robustness": "none",
+      "control": "jam",
+      "npc": "jaywalk",
+      "region": "vegas",
+      "agent": "render_v10/car__jam__jaywalk__ix6638/19_us-nv-las-vegas-strip__B_00483__agent.mp4",
+      "aerial": "render_v10/car__jam__jaywalk__ix6638/19_us-nv-las-vegas-strip__B_00483__aerial.mp4"
+    },
+    {
+      "policy": "car",
+      "robustness": "none",
+      "control": "jam",
+      "npc": "carcrash",
+      "region": "pittsburgh",
+      "agent": "render_v10/car__jam__none__ix6638/00_us-pa-pittsburgh-hazelwood__B_00188__agent.mp4",
+      "aerial": "render_v10/car__jam__none__ix6638/00_us-pa-pittsburgh-hazelwood__B_00188__aerial.mp4"
+    },
+    {
+      "policy": "car",
+      "robustness": "none",
+      "control": "jam",
+      "npc": "off",
+      "region": "vegas",
+      "agent": "render_v10/car__jam__none__ix6638/08_us-nv-las-vegas-strip__B_00238__agent.mp4",
+      "aerial": "render_v10/car__jam__none__ix6638/08_us-nv-las-vegas-strip__B_00238__aerial.mp4"
+    },
+    {
+      "policy": "car",
+      "robustness": "none",
+      "control": "jam",
+      "npc": "off",
+      "region": "vegas",
+      "agent": "render_v10/car__jam__none__ix6638/17_us-nv-las-vegas-strip__B_00216__agent.mp4",
+      "aerial": "render_v10/car__jam__none__ix6638/17_us-nv-las-vegas-strip__B_00216__aerial.mp4"
+    },
+    {
+      "policy": "car",
+      "robustness": "none",
+      "control": "jam",
+      "npc": "construction",
+      "region": "boston",
+      "agent": "render_v10/car__jam_ctrl__construction__ix6638/07_us-ma-boston__B_00467__agent.mp4",
+      "aerial": "render_v10/car__jam_ctrl__construction__ix6638/07_us-ma-boston__B_00467__aerial.mp4"
+    },
+    {
+      "policy": "car",
+      "robustness": "none",
+      "control": "jam",
+      "npc": "construction",
+      "region": "singapore",
+      "agent": "render_v10/car__jam_ctrl__construction__ix6638/11_sg-one-north__B_00194__agent.mp4",
+      "aerial": "render_v10/car__jam_ctrl__construction__ix6638/11_sg-one-north__B_00194__aerial.mp4"
+    },
+    {
+      "policy": "car",
+      "robustness": "none",
+      "control": "stop",
+      "npc": "carcrash",
+      "region": "pittsburgh",
+      "agent": "render_v10/car__stop__carcrash__7mrtyx/02_us-pa-pittsburgh-hazelwood__B_00266__agent.mp4",
+      "aerial": "render_v10/car__stop__carcrash__7mrtyx/02_us-pa-pittsburgh-hazelwood__B_00266__aerial.mp4"
+    },
+    {
+      "policy": "car",
+      "robustness": "none",
+      "control": "stop",
+      "npc": "carcrash",
+      "region": "boston",
+      "agent": "render_v10/car__stop__carcrash__7mrtyx/04_us-ma-boston__B_00309__agent.mp4",
+      "aerial": "render_v10/car__stop__carcrash__7mrtyx/04_us-ma-boston__B_00309__aerial.mp4"
+    },
+    {
+      "policy": "car",
+      "robustness": "none",
+      "control": "stop",
+      "npc": "crosswalk",
+      "region": "vegas",
+      "agent": "render_v10/car__stop__crosswalk__7mrtyx/04_us-nv-las-vegas-strip__B_00087__agent.mp4",
+      "aerial": "render_v10/car__stop__crosswalk__7mrtyx/04_us-nv-las-vegas-strip__B_00087__aerial.mp4"
+    },
+    {
+      "policy": "car",
+      "robustness": "none",
+      "control": "stop",
+      "npc": "crosswalk",
+      "region": "pittsburgh",
+      "agent": "render_v10/car__stop__crosswalk__7mrtyx/05_us-pa-pittsburgh-hazelwood__B_00418__agent.mp4",
+      "aerial": "render_v10/car__stop__crosswalk__7mrtyx/05_us-pa-pittsburgh-hazelwood__B_00418__aerial.mp4"
+    },
+    {
+      "policy": "car",
+      "robustness": "none",
+      "control": "stop",
+      "npc": "jaywalk",
+      "region": "boston",
+      "agent": "render_v10/car__stop__jaywalk__7mrtyx/08_us-ma-boston__B_00296__agent.mp4",
+      "aerial": "render_v10/car__stop__jaywalk__7mrtyx/08_us-ma-boston__B_00296__aerial.mp4"
+    },
+    {
+      "policy": "car",
+      "robustness": "none",
+      "control": "stop",
+      "npc": "off",
+      "region": "pittsburgh",
+      "agent": "render_v10/car__stop__none__7mrtyx/00_us-pa-pittsburgh-hazelwood__B_00375__agent.mp4",
+      "aerial": "render_v10/car__stop__none__7mrtyx/00_us-pa-pittsburgh-hazelwood__B_00375__aerial.mp4"
+    },
+    {
+      "policy": "car",
+      "robustness": "none",
+      "control": "stop",
+      "npc": "off",
+      "region": "vegas",
+      "agent": "render_v10/car__stop__none__7mrtyx/05_us-nv-las-vegas-strip__B_00487__agent.mp4",
+      "aerial": "render_v10/car__stop__none__7mrtyx/05_us-nv-las-vegas-strip__B_00487__aerial.mp4"
+    },
+    {
+      "policy": "car",
+      "robustness": "none",
+      "control": "stop",
+      "npc": "off",
+      "region": "boston",
+      "agent": "render_v10/car__stop__none__7mrtyx/09_us-ma-boston__B_00336__agent.mp4",
+      "aerial": "render_v10/car__stop__none__7mrtyx/09_us-ma-boston__B_00336__aerial.mp4"
+    },
+    {
+      "policy": "car",
+      "robustness": "none",
+      "control": "stop",
+      "npc": "off",
+      "region": "pittsburgh",
+      "agent": "render_v10/car__stop__none__7mrtyx/10_us-pa-pittsburgh-hazelwood__B_00185__agent.mp4",
+      "aerial": "render_v10/car__stop__none__7mrtyx/10_us-pa-pittsburgh-hazelwood__B_00185__aerial.mp4"
+    },
+    {
+      "policy": "car",
+      "robustness": "none",
+      "control": "stop",
+      "npc": "off",
+      "region": "singapore",
+      "agent": "render_v10/car__stop__none__7mrtyx/14_sg-one-north__B_00605__agent.mp4",
+      "aerial": "render_v10/car__stop__none__7mrtyx/14_sg-one-north__B_00605__aerial.mp4"
+    },
+    {
+      "policy": "car",
+      "robustness": "none",
+      "control": "tl",
+      "npc": "carcrash",
+      "region": "pittsburgh",
+      "agent": "render_v10/car__tl__carcrash__7mrtyx/00_us-pa-pittsburgh-hazelwood__B_00660__agent.mp4",
+      "aerial": "render_v10/car__tl__carcrash__7mrtyx/00_us-pa-pittsburgh-hazelwood__B_00660__aerial.mp4"
+    },
+    {
+      "policy": "car",
+      "robustness": "none",
+      "control": "tl",
+      "npc": "carcrash",
+      "region": "pittsburgh",
+      "agent": "render_v10/car__tl__carcrash__7mrtyx/02_us-pa-pittsburgh-hazelwood__B_00164__agent.mp4",
+      "aerial": "render_v10/car__tl__carcrash__7mrtyx/02_us-pa-pittsburgh-hazelwood__B_00164__aerial.mp4"
+    },
+    {
+      "policy": "car",
+      "robustness": "none",
+      "control": "tl",
+      "npc": "construction",
+      "region": "boston",
+      "agent": "render_v10/car__tl__construction__7mrtyx/01_us-ma-boston__B_00394__agent.mp4",
+      "aerial": "render_v10/car__tl__construction__7mrtyx/01_us-ma-boston__B_00394__aerial.mp4"
+    },
+    {
+      "policy": "car",
+      "robustness": "none",
+      "control": "tl",
+      "npc": "construction",
+      "region": "vegas",
+      "agent": "render_v10/car__tl__construction__7mrtyx/05_us-nv-las-vegas-strip__B_00327__agent.mp4",
+      "aerial": "render_v10/car__tl__construction__7mrtyx/05_us-nv-las-vegas-strip__B_00327__aerial.mp4"
+    },
+    {
+      "policy": "car",
+      "robustness": "none",
+      "control": "tl",
+      "npc": "crosswalk",
+      "region": "vegas",
+      "agent": "render_v10/car__tl__crosswalk__7mrtyx/07_us-nv-las-vegas-strip__B_00432__agent.mp4",
+      "aerial": "render_v10/car__tl__crosswalk__7mrtyx/07_us-nv-las-vegas-strip__B_00432__aerial.mp4"
+    },
+    {
+      "policy": "car",
+      "robustness": "none",
+      "control": "tl",
+      "npc": "off",
+      "region": "boston",
+      "agent": "render_v10/car__tl__none__7mrtyx/02_us-ma-boston__B_00613__agent.mp4",
+      "aerial": "render_v10/car__tl__none__7mrtyx/02_us-ma-boston__B_00613__aerial.mp4"
+    },
+    {
+      "policy": "car",
+      "robustness": "none",
+      "control": "tl",
+      "npc": "off",
+      "region": "singapore",
+      "agent": "render_v10/car__tl__none__7mrtyx/03_sg-one-north__B_00445__agent.mp4",
+      "aerial": "render_v10/car__tl__none__7mrtyx/03_sg-one-north__B_00445__aerial.mp4"
+    },
+    {
+      "policy": "car",
+      "robustness": "none",
+      "control": "tl",
+      "npc": "off",
+      "region": "boston",
+      "agent": "render_v10/car__tl__none__7mrtyx/10_us-ma-boston__B_00349__agent.mp4",
+      "aerial": "render_v10/car__tl__none__7mrtyx/10_us-ma-boston__B_00349__aerial.mp4"
+    },
+    {
+      "policy": "car",
+      "robustness": "none",
+      "control": "uncontrolled",
+      "npc": "carcrash",
+      "region": "pittsburgh",
+      "agent": "render_v10/car__uncontrolled__carcrash__7mrtyx/00_us-pa-pittsburgh-hazelwood__B_00345__agent.mp4",
+      "aerial": "render_v10/car__uncontrolled__carcrash__7mrtyx/00_us-pa-pittsburgh-hazelwood__B_00345__aerial.mp4"
+    },
+    {
+      "policy": "car",
+      "robustness": "none",
+      "control": "uncontrolled",
+      "npc": "carcrash",
+      "region": "boston",
+      "agent": "render_v10/car__uncontrolled__carcrash__7mrtyx/05_us-ma-boston__B_00762__agent.mp4",
+      "aerial": "render_v10/car__uncontrolled__carcrash__7mrtyx/05_us-ma-boston__B_00762__aerial.mp4"
+    },
+    {
+      "policy": "car",
+      "robustness": "none",
+      "control": "uncontrolled",
+      "npc": "carcrash",
+      "region": "boston",
+      "agent": "render_v10/car__uncontrolled__carcrash__7mrtyx/07_us-ma-boston__B_00097__agent.mp4",
+      "aerial": "render_v10/car__uncontrolled__carcrash__7mrtyx/07_us-ma-boston__B_00097__aerial.mp4"
+    },
+    {
+      "policy": "car",
+      "robustness": "none",
+      "control": "uncontrolled",
+      "npc": "carcrash",
+      "region": "pittsburgh",
+      "agent": "render_v10/car__uncontrolled__carcrash__7mrtyx/11_us-pa-pittsburgh-hazelwood__B_00583__agent.mp4",
+      "aerial": "render_v10/car__uncontrolled__carcrash__7mrtyx/11_us-pa-pittsburgh-hazelwood__B_00583__aerial.mp4"
+    },
+    {
+      "policy": "car",
+      "robustness": "none",
+      "control": "uncontrolled",
+      "npc": "construction",
+      "region": "boston",
+      "agent": "render_v10/car__uncontrolled__construction__7mrtyx/04_us-ma-boston__B_00129__agent.mp4",
+      "aerial": "render_v10/car__uncontrolled__construction__7mrtyx/04_us-ma-boston__B_00129__aerial.mp4"
+    },
+    {
+      "policy": "car",
+      "robustness": "none",
+      "control": "uncontrolled",
+      "npc": "construction",
+      "region": "vegas",
+      "agent": "render_v10/car__uncontrolled__construction__7mrtyx/05_us-nv-las-vegas-strip__B_00837__agent.mp4",
+      "aerial": "render_v10/car__uncontrolled__construction__7mrtyx/05_us-nv-las-vegas-strip__B_00837__aerial.mp4"
+    },
+    {
+      "policy": "car",
+      "robustness": "none",
+      "control": "uncontrolled",
+      "npc": "construction",
+      "region": "boston",
+      "agent": "render_v10/car__uncontrolled__construction__7mrtyx/08_us-ma-boston__B_00865__agent.mp4",
+      "aerial": "render_v10/car__uncontrolled__construction__7mrtyx/08_us-ma-boston__B_00865__aerial.mp4"
+    },
+    {
+      "policy": "car",
+      "robustness": "none",
+      "control": "uncontrolled",
+      "npc": "construction",
+      "region": "pittsburgh",
+      "agent": "render_v10/car__uncontrolled__construction__7mrtyx/15_us-pa-pittsburgh-hazelwood__B_00302__agent.mp4",
+      "aerial": "render_v10/car__uncontrolled__construction__7mrtyx/15_us-pa-pittsburgh-hazelwood__B_00302__aerial.mp4"
+    },
+    {
+      "policy": "car",
+      "robustness": "none",
+      "control": "uncontrolled",
+      "npc": "crosswalk",
+      "region": "vegas",
+      "agent": "render_v10/car__uncontrolled__crosswalk__7mrtyx/01_us-nv-las-vegas-strip__B_00701__agent.mp4",
+      "aerial": "render_v10/car__uncontrolled__crosswalk__7mrtyx/01_us-nv-las-vegas-strip__B_00701__aerial.mp4"
+    },
+    {
+      "policy": "car",
+      "robustness": "none",
+      "control": "uncontrolled",
+      "npc": "crosswalk",
+      "region": "boston",
+      "agent": "render_v10/car__uncontrolled__crosswalk__7mrtyx/06_us-ma-boston__B_00445__agent.mp4",
+      "aerial": "render_v10/car__uncontrolled__crosswalk__7mrtyx/06_us-ma-boston__B_00445__aerial.mp4"
+    },
+    {
+      "policy": "car",
+      "robustness": "none",
+      "control": "uncontrolled",
+      "npc": "crosswalk",
+      "region": "boston",
+      "agent": "render_v10/car__uncontrolled__crosswalk__7mrtyx/10_us-ma-boston__B_00450__agent.mp4",
+      "aerial": "render_v10/car__uncontrolled__crosswalk__7mrtyx/10_us-ma-boston__B_00450__aerial.mp4"
+    },
+    {
+      "policy": "car",
+      "robustness": "none",
+      "control": "uncontrolled",
+      "npc": "crosswalk",
+      "region": "pittsburgh",
+      "agent": "render_v10/car__uncontrolled__crosswalk__7mrtyx/13_us-pa-pittsburgh-hazelwood__B_00271__agent.mp4",
+      "aerial": "render_v10/car__uncontrolled__crosswalk__7mrtyx/13_us-pa-pittsburgh-hazelwood__B_00271__aerial.mp4"
+    },
+    {
+      "policy": "car",
+      "robustness": "none",
+      "control": "uncontrolled",
+      "npc": "jaywalk",
+      "region": "vegas",
+      "agent": "render_v10/car__uncontrolled__jaywalk__7mrtyx/01_us-nv-las-vegas-strip__B_00309__agent.mp4",
+      "aerial": "render_v10/car__uncontrolled__jaywalk__7mrtyx/01_us-nv-las-vegas-strip__B_00309__aerial.mp4"
+    },
+    {
+      "policy": "car",
+      "robustness": "none",
+      "control": "uncontrolled",
+      "npc": "jaywalk",
+      "region": "boston",
+      "agent": "render_v10/car__uncontrolled__jaywalk__7mrtyx/04_us-ma-boston__B_00213__agent.mp4",
+      "aerial": "render_v10/car__uncontrolled__jaywalk__7mrtyx/04_us-ma-boston__B_00213__aerial.mp4"
+    },
+    {
+      "policy": "car",
+      "robustness": "none",
+      "control": "uncontrolled",
+      "npc": "jaywalk",
+      "region": "singapore",
+      "agent": "render_v10/car__uncontrolled__jaywalk__7mrtyx/06_sg-one-north__B_00263__agent.mp4",
+      "aerial": "render_v10/car__uncontrolled__jaywalk__7mrtyx/06_sg-one-north__B_00263__aerial.mp4"
+    },
+    {
+      "policy": "car",
+      "robustness": "none",
+      "control": "uncontrolled",
+      "npc": "jaywalk",
+      "region": "vegas",
+      "agent": "render_v10/car__uncontrolled__jaywalk__7mrtyx/08_us-nv-las-vegas-strip__B_00207__agent.mp4",
+      "aerial": "render_v10/car__uncontrolled__jaywalk__7mrtyx/08_us-nv-las-vegas-strip__B_00207__aerial.mp4"
+    },
+    {
+      "policy": "car",
+      "robustness": "none",
+      "control": "uncontrolled",
+      "npc": "jaywalk",
+      "region": "vegas",
+      "agent": "render_v10/car__uncontrolled__jaywalk__7mrtyx/11_us-nv-las-vegas-strip__B_00083__agent.mp4",
+      "aerial": "render_v10/car__uncontrolled__jaywalk__7mrtyx/11_us-nv-las-vegas-strip__B_00083__aerial.mp4"
+    },
+    {
+      "policy": "car",
+      "robustness": "none",
+      "control": "uncontrolled",
+      "npc": "off",
+      "region": "singapore",
+      "agent": "render_v10/car__uncontrolled__none__7mrtyx/06_sg-one-north__B_00659__agent.mp4",
+      "aerial": "render_v10/car__uncontrolled__none__7mrtyx/06_sg-one-north__B_00659__aerial.mp4"
+    },
+    {
+      "policy": "car",
+      "robustness": "none",
+      "control": "uncontrolled",
+      "npc": "off",
+      "region": "singapore",
+      "agent": "render_v10/car__uncontrolled__none__7mrtyx/17_sg-one-north__B_00133__agent.mp4",
+      "aerial": "render_v10/car__uncontrolled__none__7mrtyx/17_sg-one-north__B_00133__aerial.mp4"
+    },
+    {
+      "policy": "car",
+      "robustness": "none",
+      "control": "urban",
+      "npc": "carcrash",
+      "region": "vegas",
+      "agent": "render_v10/car__urban__carcrash__ix6638/00_us-nv-las-vegas-strip__B_00630__agent.mp4",
+      "aerial": "render_v10/car__urban__carcrash__ix6638/00_us-nv-las-vegas-strip__B_00630__aerial.mp4"
+    },
+    {
+      "policy": "car",
+      "robustness": "none",
+      "control": "urban",
+      "npc": "construction",
+      "region": "vegas",
+      "agent": "render_v10/car__urban__construction__ix6638/00_us-nv-las-vegas-strip__B_00630__agent.mp4",
+      "aerial": "render_v10/car__urban__construction__ix6638/00_us-nv-las-vegas-strip__B_00630__aerial.mp4"
+    },
+    {
+      "policy": "car",
+      "robustness": "none",
+      "control": "urban",
+      "npc": "carcrash",
+      "region": "vegas",
+      "agent": "render_v10/car__urban__carcrash__ix6638/14_us-nv-las-vegas-strip__B_00814__agent.mp4",
+      "aerial": "render_v10/car__urban__carcrash__ix6638/14_us-nv-las-vegas-strip__B_00814__aerial.mp4"
+    },
+    {
+      "policy": "car",
+      "robustness": "none",
+      "control": "urban",
+      "npc": "crosswalk",
+      "region": "boston",
+      "agent": "render_v10/car__urban__crosswalk__ix6638/07_us-ma-boston__B_00349__agent.mp4",
+      "aerial": "render_v10/car__urban__crosswalk__ix6638/07_us-ma-boston__B_00349__aerial.mp4"
+    },
+    {
+      "policy": "car",
+      "robustness": "none",
+      "control": "urban",
+      "npc": "construction",
+      "region": "boston",
+      "agent": "render_v10/car__urban__construction__ix6638/07_us-ma-boston__B_00349__agent.mp4",
+      "aerial": "render_v10/car__urban__construction__ix6638/07_us-ma-boston__B_00349__aerial.mp4"
+    },
+    {
+      "policy": "car",
+      "robustness": "none",
+      "control": "urban",
+      "npc": "crosswalk",
+      "region": "singapore",
+      "agent": "render_v10/car__urban__crosswalk__ix6638/10_sg-one-north__B_00825__agent.mp4",
+      "aerial": "render_v10/car__urban__crosswalk__ix6638/10_sg-one-north__B_00825__aerial.mp4"
+    },
+    {
+      "policy": "car",
+      "robustness": "none",
+      "control": "urban",
+      "npc": "crosswalk",
+      "region": "singapore",
+      "agent": "render_v10/car__urban__crosswalk__ix6638/18_sg-one-north__B_00051__agent.mp4",
+      "aerial": "render_v10/car__urban__crosswalk__ix6638/18_sg-one-north__B_00051__aerial.mp4"
+    },
+    {
+      "policy": "car",
+      "robustness": "none",
+      "control": "urban",
+      "npc": "jaywalk",
+      "region": "vegas",
+      "agent": "render_v10/car__urban__jaywalk__ix6638/10_us-nv-las-vegas-strip__B_00211__agent.mp4",
+      "aerial": "render_v10/car__urban__jaywalk__ix6638/10_us-nv-las-vegas-strip__B_00211__aerial.mp4"
+    },
+    {
+      "policy": "car",
+      "robustness": "none",
+      "control": "urban",
+      "npc": "jaywalk",
+      "region": "vegas",
+      "agent": "render_v10/car__urban__jaywalk__ix6638/03_us-nv-las-vegas-strip__B_00275__agent.mp4",
+      "aerial": "render_v10/car__urban__jaywalk__ix6638/03_us-nv-las-vegas-strip__B_00275__aerial.mp4"
+    },
+    {
+      "policy": "car",
+      "robustness": "none",
+      "control": "urban",
+      "npc": "jaywalk",
+      "region": "vegas",
+      "agent": "render_v10/car__urban__jaywalk__ix6638/07_us-nv-las-vegas-strip__B_00083__agent.mp4",
+      "aerial": "render_v10/car__urban__jaywalk__ix6638/07_us-nv-las-vegas-strip__B_00083__aerial.mp4"
+    },
+    {
+      "policy": "hetero",
+      "robustness": "none",
+      "region": "boston",
+      "agent": "render_v10/het__boston__vimiui/05_us-ma-boston__B_00675__agent.mp4",
+      "aerial": "render_v10/het__boston__vimiui/05_us-ma-boston__B_00675__aerial.mp4",
+      "fullmap": "render_v10/het__boston__vimiui/05_us-ma-boston__B_00675__fullmap.mp4"
+    },
+    {
+      "policy": "hetero",
+      "robustness": "none",
+      "region": "boston",
+      "agent": "render_v10/het__boston__vimiui/08_us-ma-boston__B_00124__agent.mp4",
+      "aerial": "render_v10/het__boston__vimiui/08_us-ma-boston__B_00124__aerial.mp4",
+      "fullmap": "render_v10/het__boston__vimiui/08_us-ma-boston__B_00124__fullmap.mp4"
+    },
+    {
+      "policy": "hetero",
+      "robustness": "none",
+      "region": "boston",
+      "agent": "render_v10/het__boston__vimiui/09_us-ma-boston__B_00115__agent.mp4",
+      "aerial": "render_v10/het__boston__vimiui/09_us-ma-boston__B_00115__aerial.mp4",
+      "fullmap": "render_v10/het__boston__vimiui/09_us-ma-boston__B_00115__fullmap.mp4"
+    },
+    {
+      "policy": "hetero",
+      "robustness": "none",
+      "region": "boston",
+      "agent": "render_v10/het__boston__vimiui/18_us-ma-boston__A_00027__agent.mp4",
+      "aerial": "render_v10/het__boston__vimiui/18_us-ma-boston__A_00027__aerial.mp4",
+      "fullmap": "render_v10/het__boston__vimiui/18_us-ma-boston__A_00027__fullmap.mp4"
+    },
+    {
+      "policy": "truck",
+      "robustness": "none",
+      "control": "uncontrolled",
+      "npc": "carcrash",
+      "region": "boston",
+      "aerial": "render_cuts/truck__boston__off__carcrash__ex1jrl/03_2021.08.24.14.40.55_veh-28_00016_00503__5101c16b6a8e5d74__aerial.mp4",
+      "agent": "render_cuts/truck__boston__off__carcrash__ex1jrl/03_2021.08.24.14.40.55_veh-28_00016_00503__5101c16b6a8e5d74__agent.mp4"
+    },
+    {
+      "policy": "truck",
+      "robustness": "none",
+      "control": "uncontrolled",
+      "npc": "construction",
+      "region": "boston",
+      "agent": "render_cuts/truck__boston__off__construction__ex1jrl/04_2021.10.05.19.11.47_veh-28_01422_01650__e0026258c3905466__agent.mp4",
+      "aerial": "render_cuts/truck__boston__off__construction__ex1jrl/04_2021.10.05.19.11.47_veh-28_01422_01650__e0026258c3905466__aerial.mp4"
+    },
+    {
+      "policy": "truck",
+      "robustness": "none",
+      "control": "tl",
+      "npc": "carcrash",
+      "region": "boston",
+      "agent": "render_cuts/truck__boston__tl__carcrash__ex1jrl/01_us-ma-boston__B_00718__agent.mp4",
+      "aerial": "render_cuts/truck__boston__tl__carcrash__ex1jrl/01_us-ma-boston__B_00718__aerial.mp4"
+    },
+    {
+      "policy": "truck",
+      "robustness": "none",
+      "control": "tl",
+      "npc": "construction",
+      "region": "boston",
+      "aerial": "render_cuts/truck__boston__tl__construction__ex1jrl/02_us-ma-boston__A_00019__aerial.mp4",
+      "agent": "render_cuts/truck__boston__tl__construction__ex1jrl/02_us-ma-boston__A_00019__agent.mp4"
+    },
+    {
+      "policy": "truck",
+      "robustness": "none",
+      "control": "tl",
+      "npc": "crosswalk",
+      "region": "boston",
+      "aerial": "render_cuts/truck__boston__tl__crosswalk__ex1jrl/06_us-ma-boston__B_00757__aerial.mp4",
+      "agent": "render_cuts/truck__boston__tl__crosswalk__ex1jrl/06_us-ma-boston__B_00757__agent.mp4"
+    },
+    {
+      "policy": "truck",
+      "robustness": "none",
+      "control": "tl",
+      "npc": "off",
+      "region": "boston",
+      "agent": "render_cuts/truck__boston__tl__off__ex1jrl/06_us-ma-boston__B_00773__agent.mp4",
+      "aerial": "render_cuts/truck__boston__tl__off__ex1jrl/06_us-ma-boston__B_00773__aerial.mp4"
+    },
+    {
+      "policy": "truck",
+      "robustness": "none",
+      "control": "tl",
+      "npc": "off",
+      "region": "boston",
+      "aerial": "render_cuts/truck__boston__tl__off__ex1jrl/09_us-ma-boston__B_00757__aerial.mp4",
+      "agent": "render_cuts/truck__boston__tl__off__ex1jrl/09_us-ma-boston__B_00757__agent.mp4"
+    },
+    {
+      "policy": "car",
+      "robustness": "noisy",
+      "region": "boston",
+      "agent": "noisy/noisy_1.mp4"
+    },
+    {
+      "policy": "car",
+      "robustness": "noisy",
+      "region": "vegas",
+      "agent": "noisy/noisy_2.mp4"
+    },
+    {
+      "policy": "car",
+      "robustness": "noisy",
+      "region": "vegas",
+      "agent": "noisy/noisy_3.mp4"
+    }
+  ]
+}

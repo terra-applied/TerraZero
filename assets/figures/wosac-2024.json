@@ -1,0 +1,42 @@
+{
+  "title": "WOSAC 2024",
+  "composite": {
+    "key": "realism",
+    "label": "Realism",
+    "max": 1.0,
+    "higherBetter": true
+  },
+  "axes": [],
+  "barWidth": 470,
+  "rowH": 44,
+  "hideLegend": true,
+  "legendGroup": "wosac",
+  "methods": [
+    {
+      "name": "Expert Demonstration",
+      "ceiling": true,
+      "composite": 0.80
+    },
+    {
+      "name": "CAT-K",
+      "ceiling": true,
+      "composite": 0.766
+    },
+    {
+      "name": "SPACeR",
+      "type": "RLdemo",
+      "composite": 0.741
+    },
+    {
+      "name": "TerraZero",
+      "type": "RL",
+      "highlight": true,
+      "composite": 0.740
+    },
+    {
+      "name": "HR-PPO",
+      "type": "RLdemo",
+      "composite": 0.716
+    }
+  ]
+}

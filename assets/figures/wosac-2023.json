@@ -1,0 +1,32 @@
+{
+  "title": "WOSAC 2023",
+  "composite": {
+    "key": "realism",
+    "label": "Realism Meta",
+    "max": 1.0,
+    "higherBetter": true
+  },
+  "axes": [],
+  "barWidth": 470,
+  "rowH": 44,
+  "hideLegend": true,
+  "legendGroup": "wosac",
+  "methods": [
+    {
+      "name": "Expert Demonstration",
+      "ceiling": true,
+      "composite": 0.722
+    },
+    {
+      "name": "Gigaflow",
+      "type": "RL",
+      "composite": 0.619
+    },
+    {
+      "name": "TerraZero",
+      "type": "RL",
+      "highlight": true,
+      "composite": 0.632
+    }
+  ]
+}

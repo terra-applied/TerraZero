@@ -1,0 +1,122 @@
+{
+  "base": "https://huggingface.co/datasets/woo-who/terrazero-assets/resolve/2751437919c53b70b9b8a011d181dc8a8fac6010/wosac/",
+  "aspect": "16 / 9",
+  "clips": [
+    {
+      "src": "wosac-16.mp4",
+      "label": ""
+    },
+    {
+      "src": "wosac-17.mp4",
+      "label": ""
+    },
+    {
+      "src": "wosac-19.mp4",
+      "label": ""
+    },
+    {
+      "src": "wosac-20.mp4",
+      "label": ""
+    },
+    {
+      "src": "wosac-21.mp4",
+      "label": ""
+    },
+    {
+      "src": "wosac-22.mp4",
+      "label": ""
+    },
+    {
+      "src": "wosac-23.mp4",
+      "label": ""
+    },
+    {
+      "src": "wosac-24.mp4",
+      "label": ""
+    },
+    {
+      "src": "wosac-25.mp4",
+      "label": ""
+    },
+    {
+      "src": "wosac-26.mp4",
+      "label": ""
+    },
+    {
+      "src": "wosac-27.mp4",
+      "label": ""
+    },
+    {
+      "src": "wosac-28.mp4",
+      "label": ""
+    },
+    {
+      "src": "wosac-29.mp4",
+      "label": ""
+    },
+    {
+      "src": "wosac-30.mp4",
+      "label": ""
+    },
+    {
+      "src": "wosac-31.mp4",
+      "label": ""
+    },
+    {
+      "src": "wosac-01.mp4",
+      "label": ""
+    },
+    {
+      "src": "wosac-02.mp4",
+      "label": ""
+    },
+    {
+      "src": "wosac-03.mp4",
+      "label": ""
+    },
+    {
+      "src": "wosac-04.mp4",
+      "label": ""
+    },
+    {
+      "src": "wosac-05.mp4",
+      "label": ""
+    },
+    {
+      "src": "wosac-06.mp4",
+      "label": ""
+    },
+    {
+      "src": "wosac-07.mp4",
+      "label": ""
+    },
+    {
+      "src": "wosac-08.mp4",
+      "label": ""
+    },
+    {
+      "src": "wosac-09.mp4",
+      "label": ""
+    },
+    {
+      "src": "wosac-10.mp4",
+      "label": ""
+    },
+    {
+      "src": "wosac-11.mp4",
+      "label": ""
+    },
+    {
+      "src": "wosac-12.mp4",
+      "label": ""
+    },
+    {
+      "src": "wosac-14.mp4",
+      "label": ""
+    },
+    {
+      "src": "wosac-15.mp4",
+      "label": ""
+    }
+  ]
+}

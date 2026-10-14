@@ -1,0 +1,62 @@
+{
+  "base": "https://huggingface.co/datasets/woo-who/terrazero-assets/resolve/aecd044f3060a69add7ec4637cea1c36387d704a/val14/",
+  "aspect": "1 / 1",
+  "clips": [
+    {
+      "src": "val14-01.mp4",
+      "label": "Starting left turn"
+    },
+    {
+      "src": "val14-02.mp4",
+      "label": "Starting right turn"
+    },
+    {
+      "src": "val14-03.mp4",
+      "label": "Traffic-light intersection"
+    },
+    {
+      "src": "val14-04.mp4",
+      "label": "Changing lane"
+    },
+    {
+      "src": "val14-05.mp4",
+      "label": "Following lane with lead"
+    },
+    {
+      "src": "val14-06.mp4",
+      "label": "Stopping with lead"
+    },
+    {
+      "src": "val14-07.mp4",
+      "label": "Behind long vehicle"
+    },
+    {
+      "src": "val14-08.mp4",
+      "label": "Near multiple vehicles"
+    },
+    {
+      "src": "val14-09.mp4",
+      "label": "Stationary in traffic"
+    },
+    {
+      "src": "val14-10.mp4",
+      "label": "Waiting for pedestrian"
+    },
+    {
+      "src": "val14-11.mp4",
+      "label": "Traversing pickup/dropoff"
+    },
+    {
+      "src": "val14-12.mp4",
+      "label": "High lateral acceleration"
+    },
+    {
+      "src": "val14-13.mp4",
+      "label": "High-magnitude speed"
+    },
+    {
+      "src": "val14-14.mp4",
+      "label": "Low-magnitude speed"
+    }
+  ]
+}
