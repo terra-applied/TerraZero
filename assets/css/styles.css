@@ -424,6 +424,7 @@ mark.hl {
   line-height: 1.7;
 }
 .byline .names { color: var(--ink); }
+.byline .names a { color: inherit; }
 .affil { font-family: var(--font-mono); font-size: var(--fs-eyebrow); color: var(--gray); }
 
 /* action buttons */
