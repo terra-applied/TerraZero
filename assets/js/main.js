@@ -485,37 +485,6 @@
     root.hidden = false;
   }
 
-  // ---- BibTeX reveal + copy ------------------------------------------------
-  function initBibtex() {
-    var toggle = document.getElementById("bibtex-toggle");
-    var block = document.getElementById("bibtex-block");
-    if (!toggle || !block) return;
-    toggle.addEventListener("click", function () {
-      var opening = block.hasAttribute("hidden");
-      if (opening) block.removeAttribute("hidden"); else block.setAttribute("hidden", "");
-      toggle.setAttribute("aria-expanded", opening ? "true" : "false");
-    });
-    var copy = block.querySelector(".copy-btn");
-    var code = block.querySelector("code");
-    if (!copy || !code) return;
-    function fallback(text) {
-      var ta = document.createElement("textarea");
-      ta.value = text; ta.style.position = "fixed"; ta.style.opacity = "0";
-      document.body.appendChild(ta); ta.select();
-      try { document.execCommand("copy"); } catch (e) { /* ignore */ }
-      document.body.removeChild(ta);
-    }
-    copy.addEventListener("click", function () {
-      var text = code.textContent;
-      var flash = function () {
-        copy.textContent = "Copied!";
-        setTimeout(function () { copy.textContent = "Copy"; }, 1400);
-      };
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(text).then(flash, function () { fallback(text); flash(); });
-      } else { fallback(text); flash(); }
-    });
-  }
 
   // ---- integrations showcase -----------------------------------------------
   // A flat tablist: clicking a tab activates it, reveals its panel, hides the
@@ -616,7 +585,6 @@
     initReveal();
     initDemoGallery();
     initDemoStrips();
-    initBibtex();
     initIntegrations();
     if (window.TZtables) window.TZtables.init();
     if (window.TZcharts) window.TZcharts.init();
