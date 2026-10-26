@@ -716,57 +716,6 @@ figcaption .fig-label {
   }
 }
 
-/* ----- Integrations showcase -------------------------------------------- */
-/* A single horizontal strip of tabs (the active one boxed) selects which
-   integration shows in the stage below: a looping video beside its text. */
-.intg { margin-top: var(--space-3); }
-/* One big pill holding all options; a blue thumb (.intg-slider) slides behind
-   the active option. The thumb's size/position is set in JS from the active
-   button's geometry so it works for any label widths and wraps gracefully. */
-.intg-tabs {
-  position: relative; display: inline-flex; flex-wrap: wrap; gap: 4px;
-  margin-bottom: var(--space-3); padding: 5px;
-  background: var(--gray-soft); border: 1px solid var(--gray-line); border-radius: 999px;
-}
-.intg-slider {
-  position: absolute; top: 0; left: 0; z-index: 0;
-  border-radius: 999px; background: var(--blue); box-shadow: var(--shadow);
-  transition: transform .28s cubic-bezier(.4, 0, .2, 1), width .28s cubic-bezier(.4, 0, .2, 1), height .28s;
-}
-.intg-tab {
-  position: relative; z-index: 1; border: 0; background: transparent; cursor: pointer;
-  font-family: var(--font-sans); font-size: var(--fs-meta); font-weight: 600;
-  color: var(--ink); padding: 0.5em 1.1em; border-radius: 999px;
-  transition: color .2s;
-}
-.intg-tab:hover:not(.is-active) { color: var(--blue); }
-.intg-tab.is-active { color: #fff; }
-/* phones: tighter tabs so all three Terra Series options fit on one line */
-@media (max-width: 480px) {
-  .intg-tabs { gap: 2px; padding: 4px; }
-  .intg-tab { padding: 0.5em 0.7em; }
-}
-
-.intg-panel {
-  display: grid;
-  grid-template-columns: minmax(0, 1.18fr) minmax(0, 0.82fr);
-  gap: clamp(1.5rem, 4vw, var(--space-5));
-  align-items: center;
-}
-.intg-panel[hidden] { display: none; }
-.intg-text > :first-child { margin-top: 0; }
-.intg-media {
-  position: relative; width: 100%; aspect-ratio: 16 / 9;
-  border: 1px solid var(--gray-line); border-radius: var(--radius); overflow: hidden;
-  background: radial-gradient(120% 120% at 50% 0%, rgba(0,108,250,.06), transparent 60%), #0d1117;
-  box-shadow: var(--shadow);
-}
-.intg-video { display: block; width: 100%; height: 100%; object-fit: contain; background: #0d1117; }
-
-@media (max-width: 860px) {
-  .intg-panel { grid-template-columns: 1fr; gap: var(--space-3); }
-}
-
 .demos-col { display: flex; flex-direction: column; }
 .demo-stage { flex: 1; display: flex; }
 .demo-panel {
@@ -915,25 +864,6 @@ td .tbd { font-size: 0.92em; }
 }
 .site-footer .copyright { color: var(--gray); margin-top: var(--space-3); font-family: var(--font-mono); font-size: var(--fs-eyebrow); }
 
-/* ----- BibTeX block ------------------------------------------------------ */
-.bibtex {
-  position: relative;
-  background: #0f1115; color: #e7e9ee;
-  border-radius: var(--radius);
-  padding: var(--space-3);
-  font-family: var(--font-mono); font-size: 0.8rem; line-height: 1.55;
-  overflow-x: auto;
-}
-.bibtex .copy-btn {
-  position: absolute; top: 10px; right: 10px;
-  font-family: var(--font-sans); font-size: 0.72rem; font-weight: 600;
-  background: rgba(255,255,255,.08); color: #fff;
-  border: 1px solid rgba(255,255,255,.18); border-radius: 6px;
-  padding: 0.35em 0.7em; cursor: pointer;
-}
-.bibtex .copy-btn:hover { background: var(--blue); border-color: var(--blue); }
-
-/* ----- Charts ------------------------------------------------------------ */
 .chart-wrap { position: relative; width: 100%; }
 .chart-legend { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-2) var(--space-3); margin-top: var(--space-2); font-family: var(--font-sans); font-size: var(--fs-meta); }
 .chart-legend .key { display: inline-flex; align-items: center; gap: 0.4em; cursor: pointer; color: var(--gray); }
@@ -1113,43 +1043,14 @@ body.nav-open { overflow: hidden; }
 }
 
 /* Inline venue badge after a tab title (conference publications only) */
-.series-badge {
-  display: inline-block; vertical-align: middle; margin-left: 0.5em;
-  font-family: var(--font-sans); font-size: var(--fs-eyebrow); font-weight: 600;
-  letter-spacing: 0.04em; text-transform: uppercase;
-  padding: 0.2em 0.6em; border-radius: 999px;
-  background: #e8f0ff; color: #1a4ac4;
-}
 /* Resource buttons under a tab's description */
-.series-links { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: var(--space-2); }
 .series-note {
   font-family: var(--font-sans); font-size: var(--fs-meta); font-weight: 600;
   color: var(--gray); margin-top: var(--space-2);
 }
 
 /* Full-width tab panel: text on top, then the media showcase below */
-.intg-panel--wide { grid-template-columns: 1fr; align-items: start; }
-.intg-showcase { display: flex; flex-direction: column; gap: var(--space-3); margin-top: var(--space-3); }
-.intg-showcase .figure img { display: block; width: 100%; border-radius: var(--radius); }
 /* a single video reads better contained than stretched the full panel width */
-.intg-showcase .intg-media { width: 100%; max-width: 960px; margin-inline: auto; }
-.threeup { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-2); }
-.threeup-cell { min-width: 0; }
-.threeup-vid {
-  position: relative; border: 1px solid var(--gray-line); border-radius: var(--radius);
-  overflow: hidden; background: #0d1117;
-}
-.threeup-vid video { display: block; width: 100%; height: auto; }
-.threeup-cap { text-align: center; font-weight: 600; font-size: var(--fs-meta); margin: 0.4rem 0 0; }
-.threeup-legend {
-  position: absolute; top: 8px; right: 8px; z-index: 2;
-  background: rgba(255,255,255,.92); border: 1px solid var(--gray-line);
-  border-radius: 6px; padding: 6px 9px; font-size: 12px;
-  display: flex; flex-direction: column; gap: 5px;
-}
-.threeup-legend .row { display: flex; align-items: center; gap: 7px; }
-.threeup-legend .sw { width: 16px; height: 11px; border: 1px solid #333; }
-@media (max-width: 640px) { .threeup { grid-template-columns: 1fr; } }
 
 /* ----- Results: editorial table lead sentence ---------------------------- */
 .table-lead {

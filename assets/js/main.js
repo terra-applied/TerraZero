@@ -486,98 +486,6 @@
   }
 
 
-  // ---- integrations showcase -----------------------------------------------
-  // A flat tablist: clicking a tab activates it, reveals its panel, hides the
-  // others, and pauses the off-screen videos so only the visible one plays.
-  // Left/right arrows move focus and selection between tabs.
-  function initIntegrations() {
-    var root = document.getElementById("integrations-widget");
-    if (!root) return;
-    var tabs = Array.prototype.slice.call(root.querySelectorAll(".intg-tab"));
-    if (!tabs.length) return;
-    var slider = root.querySelector(".intg-slider");
-    var current = 0;
-    // videos hold off until the widget is scrolled into view (no autoplay attr)
-    var inView = false;
-
-    // slide the thumb behind the active tab, matching its size and position
-    function moveSlider(idx) {
-      if (!slider) return;
-      var tab = tabs[idx];
-      slider.style.width = tab.offsetWidth + "px";
-      slider.style.height = tab.offsetHeight + "px";
-      slider.style.transform = "translate(" + tab.offsetLeft + "px," + tab.offsetTop + "px)";
-    }
-
-    // a panel may hold several videos (e.g. the SPACeR 3-up comparison); play
-    // only the active panel's videos, and only while the widget is on screen.
-    function syncVideos() {
-      tabs.forEach(function (tab, i) {
-        var panel = document.getElementById(tab.getAttribute("aria-controls"));
-        if (!panel) return;
-        panel.querySelectorAll("video").forEach(function (video) {
-          if (i === current && inView) {
-            var p = video.play(); if (p && p.catch) p.catch(function () {});
-          } else {
-            video.pause();
-          }
-        });
-      });
-    }
-
-    function select(idx) {
-      current = idx;
-      tabs.forEach(function (tab, i) {
-        var active = i === idx;
-        tab.classList.toggle("is-active", active);
-        tab.setAttribute("aria-selected", active ? "true" : "false");
-        tab.tabIndex = active ? 0 : -1;
-        var panel = document.getElementById(tab.getAttribute("aria-controls"));
-        if (panel) panel.hidden = !active;
-      });
-      syncVideos();
-      moveSlider(idx);
-    }
-
-    tabs.forEach(function (tab, i) {
-      tab.addEventListener("click", function () { select(i); });
-      tab.addEventListener("keydown", function (e) {
-        var dir = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
-        if (!dir) return;
-        e.preventDefault();
-        var next = (i + dir + tabs.length) % tabs.length;
-        tabs[next].focus();
-        select(next);
-      });
-    });
-
-    // honor the markup's initial active tab (default to the first)
-    var start = tabs.findIndex(function (t) { return t.classList.contains("is-active"); });
-    start = start < 0 ? 0 : start;
-    // place the thumb without animating in from the corner on first paint
-    if (slider) slider.style.transition = "none";
-    select(start);
-    if (slider) {
-      // force reflow, then restore the animated transition for later clicks
-      void slider.offsetWidth;
-      slider.style.transition = "";
-    }
-    // keep the thumb aligned if the layout reflows (resize, font load)
-    window.addEventListener("resize", function () { moveSlider(current); });
-
-    // gate playback on visibility: start the active video when the widget
-    // scrolls into view, pause everything when it leaves
-    if ("IntersectionObserver" in window) {
-      var io = new IntersectionObserver(function (entries) {
-        entries.forEach(function (e) { inView = e.isIntersecting; });
-        syncVideos();
-      }, { threshold: 0.2 });
-      io.observe(root);
-    } else {
-      inView = true;
-      syncVideos();
-    }
-  }
 
   // ---- boot ----------------------------------------------------------------
   function boot() {
@@ -585,7 +493,6 @@
     initReveal();
     initDemoGallery();
     initDemoStrips();
-    initIntegrations();
     if (window.TZtables) window.TZtables.init();
     if (window.TZcharts) window.TZcharts.init();
     if (window.TZcompare) window.TZcompare.init();
