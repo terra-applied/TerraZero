@@ -393,15 +393,36 @@
     <div class="intg" id="integrations-widget">
       <div class="intg-tabs" role="tablist" aria-label="Select a Terra Series project">
         <span class="intg-slider" aria-hidden="true"></span>
-        <button type="button" class="intg-tab is-active" role="tab" id="intg-tab-a"
-                aria-selected="true" aria-controls="intg-panel-a">TerraTransfer</button>
+        <button type="button" class="intg-tab is-active" role="tab" id="intg-tab-p"
+                aria-selected="true" aria-controls="intg-panel-p">TerraTransfer++</button>
+        <button type="button" class="intg-tab" role="tab" id="intg-tab-a"
+                aria-selected="false" aria-controls="intg-panel-a" tabindex="-1">TerraTransfer</button>
         <button type="button" class="intg-tab" role="tab" id="intg-tab-d"
                 aria-selected="false" aria-controls="intg-panel-d" tabindex="-1">SPACeR</button>
       </div>
 
       <div class="intg-stage">
+        <!-- TerraTransfer++ -->
+        <div class="intg-panel intg-panel--wide" role="tabpanel" id="intg-panel-p" aria-labelledby="intg-tab-p">
+          <div class="intg-text">
+            <h3>Learning to Plan Without Expert Demonstrations</h3>
+            <p>TerraTransfer++ distills TerraZero's self-play rollouts into a flow-matching trajectory teacher, then aligns a camera-only planner to it — no human demonstrations or logged trajectories as targets. It reaches 59.4 EPDMS on NAVSIM navhard, outperforming every published method, 95.5 PDMS on navtest, and 0.548 HD-Score across all 436 HUGSim scenarios.</p>
+            <div class="series-links">
+              <a class="btn btn-primary" href="https://terra-applied.github.io/TerraTransferPlusPlus/" target="_blank" rel="noopener">Project Page →</a>
+              <a class="btn" href="https://arxiv.org/abs/2610.30319" target="_blank" rel="noopener">arXiv</a>
+            </div>
+          </div>
+          <div class="intg-showcase">
+            <div class="intg-media">
+              <video class="intg-video" muted loop playsinline preload="metadata"
+                     controls controlslist="nodownload"
+                     src="https://terra-applied.github.io/TerraTransferPlusPlus/assets/videos/trailer_tt_to_pp.mp4"></video>
+            </div>
+          </div>
+        </div>
+
         <!-- TerraTransfer -->
-        <div class="intg-panel intg-panel--wide" role="tabpanel" id="intg-panel-a" aria-labelledby="intg-tab-a">
+        <div class="intg-panel intg-panel--wide" role="tabpanel" id="intg-panel-a" aria-labelledby="intg-tab-a" hidden>
           <div class="intg-text">
             <h3>Learning to Drive Without Expert Demonstrations</h3>
             <p>TerraTransfer uses TerraZero's self-play planner as a teacher and distills its competence into an end-to-end camera policy — no human demonstrations required. It aligns the vision policy's latent space to the planner's vector representation, achieving 0.490 HD-Score on HUGSim and outperforming imitation baselines by +0.130.</p>

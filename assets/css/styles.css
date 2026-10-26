@@ -740,6 +740,11 @@ figcaption .fig-label {
 }
 .intg-tab:hover:not(.is-active) { color: var(--blue); }
 .intg-tab.is-active { color: #fff; }
+/* phones: tighter tabs so all three Terra Series options fit on one line */
+@media (max-width: 480px) {
+  .intg-tabs { gap: 2px; padding: 4px; }
+  .intg-tab { padding: 0.5em 0.7em; }
+}
 
 .intg-panel {
   display: grid;
