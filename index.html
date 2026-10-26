@@ -78,15 +78,7 @@
         <div class="actions">
           <a class="btn btn-primary" href="https://huggingface.co/datasets/woo-who/terrazero-assets/resolve/main/paper/terrazero-technical-report.pdf" target="_blank" rel="noopener">Technical Report</a>
           <a class="btn" href="https://arxiv.org/abs/2607.13028" target="_blank" rel="noopener">arXiv</a>
-          <button type="button" class="btn" id="bibtex-toggle" aria-expanded="false" aria-controls="bibtex-block">BibTeX</button>
         </div>
-        <pre class="bibtex" id="bibtex-block" hidden><button type="button" class="copy-btn">Copy</button><code>@techreport{terrazero2026,
-  title       = {TerraZero: Procedural Driving Simulation for Zero-Demonstration Self-Play at Scale},
-  author      = {Wu, Zhouchonghao and Rangesh, Akshay and Li, Weixin and Chang, Wei-Jer and Lee, Zachary and Bonab, Saeed and Wang, Tim and Zhan, Wei},
-  institution = {Applied Intuition},
-  year        = {2026},
-  type        = {Technical Report}
-}</code></pre>
       </div>
     </div>
   </div>
@@ -389,136 +381,23 @@
 <section id="terra-series">
   <div class="wide reveal">
     <p class="eyebrow">Terra Series</p>
-    <h2>Empowering Physical AI Research</h2>
-    <div class="intg" id="integrations-widget">
-      <div class="intg-tabs" role="tablist" aria-label="Select a Terra Series project">
-        <span class="intg-slider" aria-hidden="true"></span>
-        <button type="button" class="intg-tab is-active" role="tab" id="intg-tab-p"
-                aria-selected="true" aria-controls="intg-panel-p">TerraTransfer++</button>
-        <button type="button" class="intg-tab" role="tab" id="intg-tab-a"
-                aria-selected="false" aria-controls="intg-panel-a" tabindex="-1">TerraTransfer</button>
-        <button type="button" class="intg-tab" role="tab" id="intg-tab-d"
-                aria-selected="false" aria-controls="intg-panel-d" tabindex="-1">SPACeR</button>
-      </div>
-
-      <div class="intg-stage">
-        <!-- TerraTransfer++ -->
-        <div class="intg-panel intg-panel--wide" role="tabpanel" id="intg-panel-p" aria-labelledby="intg-tab-p">
-          <div class="intg-text">
-            <h3>Learning to Plan Without Expert Demonstrations</h3>
-            <p>TerraTransfer++ distills TerraZero's self-play rollouts into a flow-matching trajectory teacher, then aligns a camera-only planner to it — no human demonstrations or logged trajectories as targets. It reaches 59.4 EPDMS on NAVSIM navhard, outperforming every published method, 95.5 PDMS on navtest, and 0.548 HD-Score across all 436 HUGSim scenarios.</p>
-            <div class="series-links">
-              <a class="btn btn-primary" href="https://terra-applied.github.io/TerraTransferPlusPlus/" target="_blank" rel="noopener">Project Page →</a>
-              <a class="btn" href="https://arxiv.org/abs/2610.30319" target="_blank" rel="noopener">arXiv</a>
-            </div>
-          </div>
-          <div class="intg-showcase">
-            <div class="intg-media">
-              <video class="intg-video" muted loop playsinline preload="metadata"
-                     controls controlslist="nodownload"
-                     src="https://terra-applied.github.io/TerraTransferPlusPlus/assets/videos/trailer_tt_to_pp.mp4"></video>
-            </div>
-          </div>
-        </div>
-
-        <!-- TerraTransfer -->
-        <div class="intg-panel intg-panel--wide" role="tabpanel" id="intg-panel-a" aria-labelledby="intg-tab-a" hidden>
-          <div class="intg-text">
-            <h3>Learning to Drive Without Expert Demonstrations</h3>
-            <p>TerraTransfer uses TerraZero's self-play planner as a teacher and distills its competence into an end-to-end camera policy — no human demonstrations required. It aligns the vision policy's latent space to the planner's vector representation, achieving 0.490 HD-Score on HUGSim and outperforming imitation baselines by +0.130.</p>
-            <div class="series-links">
-              <a class="btn btn-primary" href="https://terra-applied.github.io/TerraTransfer" target="_blank" rel="noopener">Project Page →</a>
-              <a class="btn" href="https://arxiv.org/abs/2606.17386" target="_blank" rel="noopener">arXiv</a>
-            </div>
-          </div>
-          <div class="intg-showcase">
-            <div class="intg-media">
-              <video class="intg-video" muted loop playsinline preload="metadata"
-                     controls controlslist="nodownload"
-                     src="https://huggingface.co/datasets/woo-who/terrazero-assets/resolve/main/terra-series/terratransfer.mp4"></video>
-            </div>
-          </div>
-        </div>
-
-        <!-- SPACeR -->
-        <div class="intg-panel intg-panel--wide" role="tabpanel" id="intg-panel-d" aria-labelledby="intg-tab-d" hidden>
-          <div class="intg-text">
-            <h3>Human-Like Simulation Agents via Self-Play Anchoring <span class="series-badge">ICLR 2026</span></h3>
-            <p>SPACeR anchors TerraZero's self-play RL to a pretrained tokenized reference model, making sim agents that are simultaneously human-like and reactive. The resulting policy is ~50× smaller than tokenized baselines with 10× faster inference, and outperforms prior self-play and imitation methods on the Waymo Sim Agents Challenge.</p>
-            <div class="series-links">
-              <a class="btn btn-primary" href="https://spacer-ai.github.io/" target="_blank" rel="noopener">Project Page →</a>
-              <a class="btn" href="https://arxiv.org/abs/2510.18060" target="_blank" rel="noopener">arXiv</a>
-              <a class="btn" href="https://openreview.net/forum?id=Q5H3NCy18S" target="_blank" rel="noopener">Paper</a>
-            </div>
-          </div>
-          <div class="intg-showcase">
-            <div class="threeup">
-              <div class="threeup-cell">
-                <div class="threeup-vid">
-                  <video loop muted playsinline preload="metadata"
-                         src="https://spacer-ai.github.io/static/videos/source/baseline_0/paper_selfplay_nodrop_2a02131f75e5a3c3_sample0.mp4"></video>
-                </div>
-                <p class="threeup-cap">PPO</p>
-              </div>
-              <div class="threeup-cell">
-                <div class="threeup-vid">
-                  <video loop muted playsinline preload="metadata"
-                         src="https://spacer-ai.github.io/static/videos/source/baseline_0/paper_humanppo_2a02131f75e5a3c3_sample0.mp4"></video>
-                </div>
-                <p class="threeup-cap">HR-PPO</p>
-              </div>
-              <div class="threeup-cell">
-                <div class="threeup-vid">
-                  <div class="threeup-legend" aria-hidden="true">
-                    <span class="row"><span class="sw" style="background:#87CEEB"></span>Targeted Agent</span>
-                    <span class="row"><span class="sw" style="background:#7a7a7a"></span>Other Agents</span>
-                  </div>
-                  <video loop muted playsinline preload="metadata"
-                         src="https://spacer-ai.github.io/static/videos/source/baseline_0/paper_human_2a02131f75e5a3c3_sample0.mp4"></video>
-                </div>
-                <p class="threeup-cap">SPACeR</p>
-              </div>
-            </div>
-            <figure class="figure" style="margin:0">
-              <img src="assets/figures/spacer_arch.png" alt="SPACeR architecture: batched self-play rollouts anchored to a tokenized reference model via a KL term." loading="lazy">
-              <figcaption>SPACeR anchors decentralized self-play to a frozen tokenized reference model, balancing a task reward with a human-likeness KL term.</figcaption>
-            </figure>
-          </div>
-        </div>
-      </div>
-      <noscript>
-        <p class="muted">Enable JavaScript to browse the Terra Series.</p>
-      </noscript>
-    </div>
+    <h2>Part of the Terra Series</h2>
+    <div data-terra-series="terrazero"></div>
+    <noscript><p><a href="https://terra-applied.github.io/">Browse the Terra Series</a></p></noscript>
   </div>
 </section>
 
 </main>
 
 <!-- ===================== Footer ===================== -->
-<footer class="site-footer">
-  <div class="wide">
-    <div class="foot-grid">
-      <div>
-        <div class="brand-mark" style="color:#fff">TerraZero</div>
-        <p style="max-width:38ch;color:#cfd3da">Procedural driving simulation for zero-demonstration self-play at scale.</p>
-      </div>
-      <div>
-        <p style="margin:0 0 .4rem;font-weight:600">Links</p>
-        <p style="margin:.2rem 0"><a href="https://huggingface.co/datasets/woo-who/terrazero-assets/resolve/main/paper/terrazero-technical-report.pdf" target="_blank" rel="noopener">Report</a></p>
-        <p style="margin:.2rem 0"><a href="https://arxiv.org/abs/2607.13028" target="_blank" rel="noopener">arXiv</a></p>
-        <p style="margin:.2rem 0"><span class="foot-pending">Blog Post (on release)</span></p>
-      </div>
-    </div>
-    <p class="copyright">© 2026 Applied Intuition. All rights reserved.</p>
-  </div>
-</footer>
+<footer class="site-footer" data-terra-series-footer></footer>
 
 <script src="assets/vendor/katex/katex.min.js" defer></script>
 <script src="assets/vendor/katex/auto-render.min.js" defer></script>
 <script src="assets/js/charts.js" defer></script>
 <script src="assets/js/comparison.js" defer></script>
 <script src="assets/js/tables.js" defer></script>
+<script src="/assets/series/terra-series.js" defer></script>
 <script src="assets/js/main.js" defer></script>
 </body>
 </html>
